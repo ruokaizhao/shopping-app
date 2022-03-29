@@ -1,15 +1,24 @@
 import { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import Logout from "./Logout";
 import NavBar from "./NavBar";
 import Signup from "./Signup";
+import Products from "./Products";
 
 function App() {
   const [user, setUser] = useState({})
+  const[products, setProducts] = useState([])
 
   useEffect(() => {
     fetch("/api/me")
     .then((r) => r.json())
     .then((data) => setUser(data))
+  }, [])
+
+  useEffect(() => {
+    fetch("/api/products")
+    .then((r) => r.json())
+    .then((data) => setProducts(data))
   }, [])
 
   return (
@@ -19,8 +28,11 @@ function App() {
         <Route path="/signup">
           <Signup onLogin={setUser} />
         </Route>
+        <Route path="/logout">
+          <Logout />
+        </Route>
         <Route exact path="/">
-          <p>{user.name}</p>
+          <Products products={products} />
         </Route>        
       </Switch>      
     </div>

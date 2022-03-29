@@ -4,7 +4,8 @@ import { NavLink } from "react-router-dom";
 function NavBar() {
   return (
     <div>
-      <NavLink to="/signup">Signup</NavLink>      
+      <NavLink to="/signup">Signup</NavLink>
+      <NavLink to="/logout">Logout</NavLink>      
     </div>
   );
 }
