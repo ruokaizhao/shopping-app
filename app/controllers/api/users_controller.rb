@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::UsersController < ApplicationController
   before_action :authorize, only: [:show]
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 

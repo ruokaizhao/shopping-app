@@ -15,7 +15,7 @@ function Signup({ onLogin }) {
 
   function handleFormSubmit(e) {
     e.preventDefault()
-    fetch("/signup", {
+    fetch("/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -35,15 +35,15 @@ function Signup({ onLogin }) {
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
-        <lable for="username">Please enter your username:</lable><br/>
+        <label htmlFor="username">Please enter your username:</label><br/>
         <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} /><br/>
-        <lable for="password">Please enter your password:</lable><br/>
+        <label htmlFor="password">Please enter your password:</label><br/>
         <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} /><br/>
-        <label for="password2">Please confirm your password:</label><br/>
+        <label htmlFor="password2">Please confirm your password:</label><br/>
         <input type="password" id="password2" name="password2" value={formData.password2} onChange={handleChange} /><br/>
-        <lable for="name">Please enter your name:</lable><br/>
+        <label htmlFor="name">Please enter your name:</label><br/>
         <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} /><br/>
-        <label for="email">please enter your email:</label><br/>
+        <label htmlFor="email">please enter your email:</label><br/>
         <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} /><br/>
         <button type="submit">Submit</button>
       </form>      
