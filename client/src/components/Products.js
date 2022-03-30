@@ -1,14 +1,14 @@
 import React from 'react';
 import Product from './Product';
 
-function Products({ products }) {
+function Products({ products, cart, setCart }) {
 
 
   return (
     <div>
       {products.map((product) => {
         return(
-          <Product key={product.id} product={product} />
+          <Product key={product.id} product={product} cart={cart} setCart={setCart} />
         )
       })}
       

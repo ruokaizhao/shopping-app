@@ -5,10 +5,12 @@ import NavBar from "./NavBar";
 import Signup from "./Signup";
 import Products from "./Products";
 import Login from "./Login";
+import Cart from "./Cart";
 
 function App() {
   const [user, setUser] = useState({})
   const [products, setProducts] = useState([])
+  const [cart, setCart] = useState([])
 
   useEffect(() => {
     fetch("/api/me")
@@ -34,7 +36,7 @@ function App() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar cart={cart}/>
       <Switch>
         <Route path="/signup">
           <Signup onLogin={setUser} />
@@ -45,8 +47,11 @@ function App() {
         <Route path="/login">
           <Login onLogin={setUser} />
         </Route>
+        <Route path="/cart">
+          <Cart cart={cart} setCart={setCart} />
+        </Route>
         <Route exact path="/">
-          <Products products={products} />
+          <Products products={products} cart={cart} setCart={setCart} />
         </Route>        
       </Switch>      
     </div>

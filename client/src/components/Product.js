@@ -1,6 +1,10 @@
 import React from 'react';
 
-function Product({ product }) {
+function Product({ product, cart, setCart }) {
+
+  function handleCartClick() {
+    setCart([...cart, product])
+  }
 
   return (
     <div>
@@ -8,7 +12,7 @@ function Product({ product }) {
       <h2>{product.price}</h2>
       <p>{product.rating}</p>
       <img src={product.image} alt={product.title} />
-            
+      <button onClick={handleCartClick}>Add to cart</button>            
     </div>
   );
 }
