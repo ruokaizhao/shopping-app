@@ -28,8 +28,22 @@ function Signup({ onLogin }) {
         email: formData.email
       })
     })
-    .then((r) => r.json())
-    .then((data) => onLogin(data))
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((user) => {
+          onLogin(user)
+          setFormData({
+            username: "",
+            password: "",
+            password2: "",
+            name: "",
+            email: "" 
+          })
+        })
+      } else {
+        r.json().then((errors) => console.log(errors))
+      }
+    })
   }
 
   return (

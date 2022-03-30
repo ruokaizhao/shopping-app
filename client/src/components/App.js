@@ -4,21 +4,32 @@ import Logout from "./Logout";
 import NavBar from "./NavBar";
 import Signup from "./Signup";
 import Products from "./Products";
+import Login from "./Login";
 
 function App() {
   const [user, setUser] = useState({})
-  const[products, setProducts] = useState([])
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
     fetch("/api/me")
-    .then((r) => r.json())
-    .then((data) => setUser(data))
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user))
+      } else {
+        r.json().then((errors) => console.log(errors))
+      }
+    })
   }, [])
 
   useEffect(() => {
     fetch("/api/products")
-    .then((r) => r.json())
-    .then((data) => setProducts(data))
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((products) => setProducts(products))
+      } else {
+        r.json().then((errors) => console.log(errors))
+      }
+    })
   }, [])
 
   return (
@@ -30,6 +41,9 @@ function App() {
         </Route>
         <Route path="/logout">
           <Logout />
+        </Route>
+        <Route path="/login">
+          <Login onLogin={setUser} />
         </Route>
         <Route exact path="/">
           <Products products={products} />
