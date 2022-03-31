@@ -37,6 +37,25 @@ function ProductInCart({ productInCart }) {
     })
   }
 
+  function handleAddCartClick() {
+    fetch(`/api/carts/${productInCart.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        quantity: productInCart.quantity + 1
+      })
+    })
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((data) => dispatch(cartUpdated(data)))
+      } else {
+        r.json().then((errors) => console.log(errors))
+      }
+    })
+  }
+
   return (
     <div>
       <h2>Title: {productInCart.title}</h2>
@@ -47,7 +66,8 @@ function ProductInCart({ productInCart }) {
       {productInCart.quantity > 1 
       ? <button onClick={handleMinusCartClick}>-</button>
       : <button onClick={handleRemoveCartClick}>Remove from cart</button>
-      }             
+      }
+      <button onClick={handleAddCartClick}>+</button>             
     </div>
   );
 }
