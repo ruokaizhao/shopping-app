@@ -21,7 +21,7 @@ const cartsSlice = createSlice({
     },
     cartUpdated(state, action) {
       const item = state.entities.find((product) => product.id === action.payload.id)
-      item.quantity += 1
+      item.quantity = action.payload.quantity
     }
   },
   extraReducers: {
