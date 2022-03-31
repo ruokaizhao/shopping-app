@@ -20,8 +20,9 @@ function ProductInCart({ productInCart }) {
 
   return (
     <div>
-      <h2>{productInCart.title}</h2>
-      <h2>{productInCart.price}</h2>
+      <h2>Title: {productInCart.title}</h2>
+      <h2>Price: {productInCart.price}</h2>
+      <h2>Quantity: {productInCart.quantity}</h2>
       <p>{productInCart.rating}</p>
       <img src={productInCart.image} alt={productInCart.title} />     
       <button onClick={handleRemoveCartClick}>Remove from cart</button>       

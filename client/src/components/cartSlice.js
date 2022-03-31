@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchCarts = createAsyncThunk("carts/fetchCarts", () => {
   return fetch("/api/carts")
   .then((r) => r.json())
-  .then((data) => console.log(data))
+  .then((data) => data)
 })
 
 const cartsSlice = createSlice({
@@ -18,6 +18,10 @@ const cartsSlice = createSlice({
     cartRemoved(state, action) {
       const index = state.entities.findIndex((product) => product.id === action.payload)
       state.entities.splice(index, 1)
+    },
+    cartUpdated(state, action) {
+      const item = state.entities.find((product) => product.id === action.payload.id)
+      item.quantity += 1
     }
   },
   extraReducers: {
@@ -27,5 +31,5 @@ const cartsSlice = createSlice({
   }
 })
 
-export const { cartAdded, cartRemoved } = cartsSlice.actions;
+export const { cartAdded, cartRemoved, cartUpdated } = cartsSlice.actions;
 export default cartsSlice.reducer;

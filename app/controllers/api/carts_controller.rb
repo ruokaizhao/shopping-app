@@ -18,10 +18,16 @@ class Api::CartsController < ApplicationController
     head :no_content
   end
 
+  def update
+    cart = Cart.find(params[:id])
+    cart.update!(quantity: params[:quantity])
+    render json: cart, status: :ok
+  end
+
   private
 
   def cart_params
-    params.permit(:title, :price, :rating, :description, :image, :user_id)
+    params.permit(:title, :price, :rating, :description, :image, :user_id, :quantity)
   end
 
   def render_unprocessable_entity_response(invalid)
