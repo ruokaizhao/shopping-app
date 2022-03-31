@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 
 function Signup({ onLogin }) {
   const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ function Signup({ onLogin }) {
     name: "",
     email: ""
   })
+
+  const history = useHistory()
 
   function handleChange(e) {
     setFormData({...formData, [e.target.name]: e.target.value})
@@ -32,6 +35,7 @@ function Signup({ onLogin }) {
       if (r.ok) {
         r.json().then((user) => {
           onLogin(user)
+          history.pushState("/")
           setFormData({
             username: "",
             password: "",

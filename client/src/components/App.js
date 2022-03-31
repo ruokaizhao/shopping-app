@@ -10,7 +10,6 @@ import Cart from "./Cart";
 function App() {
   const [user, setUser] = useState({})
   const [products, setProducts] = useState([])
-  const [cart, setCart] = useState([])
 
   useEffect(() => {
     fetch("/api/me")
@@ -36,7 +35,7 @@ function App() {
 
   return (
     <div>
-      <NavBar cart={cart}/>
+      <NavBar />
       <Switch>
         <Route path="/signup">
           <Signup onLogin={setUser} />
@@ -48,10 +47,10 @@ function App() {
           <Login onLogin={setUser} />
         </Route>
         <Route path="/cart">
-          <Cart cart={cart} setCart={setCart} />
+          <Cart />
         </Route>
         <Route exact path="/">
-          <Products products={products} cart={cart} setCart={setCart} />
+          <Products products={products} />
         </Route>        
       </Switch>      
     </div>

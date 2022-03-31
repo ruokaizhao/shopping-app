@@ -1,5 +1,5 @@
 {
-  "name": "amazon-clone",
+  "name": "example-project",
   "description": "Build scripts for Heroku",
   "engines": {
     "node": ">= 14"

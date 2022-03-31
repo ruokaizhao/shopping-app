@@ -1,10 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { itemRemoved } from './cartSlice';
 
-function ProductInCart({ product, cart, setCart }) {
+function ProductInCart({ product }) {
+  const dispatch = useDispatch()
 
   function handleRemoveCartClick() {
-    const newCart = cart.filter((item) => item.id !== product.id)
-    setCart(newCart)
+    dispatch(itemRemoved(product.id))
   }
 
   return (
