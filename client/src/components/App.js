@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import Signup from "./Signup";
 import Products from "./Products";
 import Login from "./Login";
-import Cart from "./Cart";
+import Cart from "./Carts";
 
 function App() {
   const [user, setUser] = useState({})
@@ -46,11 +46,11 @@ function App() {
         <Route path="/login">
           <Login onLogin={setUser} />
         </Route>
-        <Route path="/cart">
+        <Route path="/carts">
           <Cart />
         </Route>
         <Route exact path="/">
-          <Products products={products} />
+          <Products products={products} user={user} />
         </Route>        
       </Switch>      
     </div>

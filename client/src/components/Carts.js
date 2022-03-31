@@ -3,15 +3,16 @@ import { useSelector } from 'react-redux';
 import ProductInCart from "./ProductInCart";
 
 function Cart() {
-  const cart = useSelector((state) => state.cart.entities)
-  const total = cart.reduce((previous, current) => previous + current.price, 0)
+  const carts = useSelector((state) => state.carts.entities)
+  const total = carts.reduce((previous, current) => previous + current.price, 0)
+
 
   return (
     <div>
       <p>Total: {total}</p>
-      {cart.map((product) => {
+      {carts.map((productInCart) => {
         return (
-          <ProductInCart key={product.id} product={product} />
+          <ProductInCart key={productInCart.id} productInCart={productInCart} />
         )
       })}      
     </div>

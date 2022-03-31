@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     resources :products, only: [:index, :show]
+    resources :carts, only: [:create, :index, :destroy]
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"
