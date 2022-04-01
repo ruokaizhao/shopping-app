@@ -3,7 +3,8 @@ class Api::CartsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
   def index
-    carts = Cart.all
+    user = User.find(params[:user_id])
+    carts = user.carts
     render json: carts, status: :ok
   end
 

@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchCarts = createAsyncThunk("carts/fetchCarts", () => {
-  return fetch("/api/carts")
+// The return value of createAsyncThunk will be the action.payload in the corresponding reducers in the extraReducers.
+export const fetchCarts = createAsyncThunk("carts/fetchCarts", async (userId) => {
+  return fetch(`/api/users/${userId}/carts`)
   .then((r) => r.json())
   .then((data) => data)
 })

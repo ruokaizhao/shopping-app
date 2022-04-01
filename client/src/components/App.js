@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar userId={user.id} />
       <Switch>
         <Route path="/signup">
           <Signup onLogin={setUser} />
