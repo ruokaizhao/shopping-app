@@ -35,7 +35,7 @@ function Signup({ onLogin }) {
       if (r.ok) {
         r.json().then((user) => {
           onLogin(user)
-          history.pushState("/")
+          history.push("/")
           setFormData({
             username: "",
             password: "",
