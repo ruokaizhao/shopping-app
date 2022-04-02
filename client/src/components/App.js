@@ -7,6 +7,7 @@ import Products from "./Products";
 import Login from "./Login";
 import Cart from "./Carts";
 import SearchBar from "./SearchBar";
+import ProductDetail from "./ProductDetail";
 
 function App() {
   const [user, setUser] = useState({})
@@ -49,6 +50,9 @@ function App() {
         </Route>
         <Route path="/carts">
           <Cart />
+        </Route>
+        <Route path="/products/:productId">
+          <ProductDetail />
         </Route>
         <Route exact path="/">
           <SearchBar onSearch={setProducts} />

@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { cartAdded, cartUpdated } from './cartSlice';
 
 function Product({ product, user }) {
   const dispatch = useDispatch()
-  const { title, price, description, image } = product
+  const { id, title, price, description, image } = product
   const carts = useSelector((state) => state.carts.entities)
 
   function handleCartClick() {
@@ -57,9 +58,11 @@ function Product({ product, user }) {
 
   return (
     <div>
-      <h2>{title}</h2>
+      <Link to={`products/${id}`}>
+        <h2>{title}</h2>      
+        <img src={image} alt={title} />
+      </Link>      
       <h2>{price}</h2>
-      <img src={image} alt={title} />
       <button onClick={handleCartClick}>Add to cart</button>            
     </div>
   );
