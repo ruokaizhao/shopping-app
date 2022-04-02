@@ -4,11 +4,17 @@ Rails.application.routes.draw do
   # class Api::CartsController < ApplicationController instead of class CartsController < ApplicationController
   namespace :api do
     resources :products, only: [:index, :show]
+
     resources :users, only: [] do
       resources :carts, only: [:index]
     end
+
     resources :carts, only: [:create, :destroy, :update]
-    # get "/users/:user_id/carts", to: "carts#index"
+
+    get "/search/:search", to: "products#search"
+    # The "" and " " search will hit "/search" route.
+    get "/search", to: "products#index"
+
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"

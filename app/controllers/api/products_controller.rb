@@ -3,8 +3,15 @@ class Api::ProductsController < ApplicationController
 
   def index
     products = Product.all
-    render json: products
+    render json: products, status: :ok
   end
+
+  def search
+    search = params[:search].downcase
+    products = Product.all.where("lower(title) LIKE :search", search: "%#{search}%")
+    render json: products, status: :ok
+  end
+
 
   private
   
