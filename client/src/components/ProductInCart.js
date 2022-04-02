@@ -61,7 +61,6 @@ function ProductInCart({ productInCart }) {
       <h2>Title: {productInCart.title}</h2>
       <h2>Price: {productInCart.price}</h2>
       <h2>Quantity: {productInCart.quantity}</h2>
-      <p>{productInCart.rating}</p>
       <img src={productInCart.image} alt={productInCart.title} />
       {productInCart.quantity > 1 
       ? <button onClick={handleMinusCartClick}>-</button>
