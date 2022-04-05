@@ -17,7 +17,6 @@ class Api::ProductsController < ApplicationController
     render json: products, status: :ok
   end
 
-
   private
   
   def authorize

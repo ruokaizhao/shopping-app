@@ -21,11 +21,11 @@ function NavBar({ userId }) {
 
   return (
     <div>
-      <NavLink to="/">Home page</NavLink>
-      <NavLink to="/signup">Signup</NavLink>
-      <NavLink to="/logout">Logout</NavLink>
-      <NavLink to="/login">Login</NavLink>
-      <NavLink to="/carts">Items in cart: {itemsInCarts}</NavLink>      
+      <NavLink to="/">Home page</NavLink><br/>
+      <NavLink to="/signup">Signup</NavLink><br/>
+      <NavLink to="/logout">Logout</NavLink><br/>
+      <NavLink to="/login">Login</NavLink><br/>
+      <NavLink to="/carts">Items in cart: {itemsInCarts}</NavLink><br/>      
     </div>
   );
 }

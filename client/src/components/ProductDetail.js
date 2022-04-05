@@ -5,7 +5,6 @@ import Reviews from "./Reviews";
 
 function ProductDetail({ user }) {
   const match = useRouteMatch()
-  console.log(match.url)
   const params = useParams()
   const [productDetail, setProductDetail] = useState({})
 
