@@ -52,7 +52,7 @@ function App() {
           <Cart />
         </Route>
         <Route path="/products/:productId">
-          <ProductDetail />
+          <ProductDetail user={user}/>
         </Route>
         <Route exact path="/">
           <SearchBar onSearch={setProducts} />

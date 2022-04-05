@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { cartAdded, cartUpdated } from './cartSlice';
 
 function Product({ product, user }) {
+  const match = useRouteMatch()
   const dispatch = useDispatch()
   const { id, title, price, description, image } = product
   const carts = useSelector((state) => state.carts.entities)
@@ -43,7 +44,6 @@ function Product({ product, user }) {
           price,
           description,
           image
-
         })
       })
       .then((r) => {
@@ -58,10 +58,17 @@ function Product({ product, user }) {
 
   return (
     <div>
+      {match.url === "/" 
+      ?
       <Link to={`products/${id}`}>
         <h2>{title}</h2>      
         <img src={image} alt={title} />
-      </Link>      
+      </Link> 
+      : 
+      <div>
+        <h2>{title}</h2>      
+        <img src={image} alt={title} />
+      </div>}           
       <h2>{price}</h2>
       <button onClick={handleCartClick}>Add to cart</button>            
     </div>

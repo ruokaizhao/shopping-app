@@ -1,9 +1,14 @@
 class Api::ProductsController < ApplicationController
-  before_action :authorize
+  # before_action :authorize
 
   def index
     products = Product.all
     render json: products, status: :ok
+  end
+
+  def show
+    product = Product.find(params[:id])
+    render json: product, serializer: ProductReviewSerializer, status: :ok
   end
 
   def search
