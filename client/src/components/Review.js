@@ -46,13 +46,31 @@ function Review({ review, userId, productDetail, setProductDetail }) {
     })
   }
 
+  function handleDeleteClick() {
+    fetch(`/api/reviews/${review.id}`, {
+      method: "DELETE"
+    })
+    .then((r) => {
+      if (r.ok) {
+        setProductDetail({...productDetail, reviews: productDetail.reviews.filter((data) => {
+          return data.id !== review.id
+        })})
+      }
+    })
+  }
+
   return (
     <div>
       <p>{review.name}</p>
       <p>{review.updated_at}</p>
       <p>{review.rating}</p>
       <p>{review.content}</p>
-      {currentUser ? <button onClick={handleEditClick}>Edit</button> : null}
+      {currentUser ? 
+      <div>
+        <button onClick={handleEditClick}>Edit</button> 
+        <button onClick={handleDeleteClick}>Delete</button> 
+      </div>
+      : null}
       {isEditing ? 
        <form onSubmit={handleReviewSubmit}> 
         <div onChange={handleChange}>       
@@ -77,7 +95,7 @@ function Review({ review, userId, productDetail, setProductDetail }) {
         
         <button type="submit">Submit your review</button>
       </form>
-      : null}      
+      : null}     
     </div>
   );
 }
