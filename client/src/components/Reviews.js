@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Review from "./Review";
 
-function Reviews({ reviews }) {
+function Reviews({ reviews, userId, productId, productDetail, setProductDetail }) {
   const [formData, setFormData] = useState({
     rating: "",
     content: ""
@@ -13,14 +13,30 @@ function Reviews({ reviews }) {
 
   function handleReviewSubmit(e) {
     e.preventDefault()
-    console.log(formData)
+    fetch("/api/reviews", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: userId,
+        product_id: productId,
+        rating: formData.rating,
+        content: formData.content
+      })
+    })
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((review) => setProductDetail({...productDetail, reviews: [...productDetail.reviews, review]}))
+      }
+    })
   }
 
   return (
     <div>
       {reviews.map((review) => {
         return (
-          <Review key={review.id} review={review} />
+          <Review key={review.id} review={review} userId={userId} setProductDetail={setProductDetail} productDetail={productDetail} />
         )
       })}
       <form onSubmit={handleReviewSubmit}> 
