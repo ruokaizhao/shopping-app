@@ -6,6 +6,7 @@ function Reviews({ reviews, userId, productId, productDetail, setProductDetail }
     rating: "",
     content: ""
   })
+  const [defaultReviewRating, setDefaultReviewRating] = useState("")
 
   function handleChange(e) {
     setFormData({...formData, [e.target.name]: e.target.value})
@@ -29,6 +30,11 @@ function Reviews({ reviews, userId, productId, productDetail, setProductDetail }
       if (r.ok) {
         r.json().then((review) => setProductDetail({...productDetail, reviews: [...productDetail.reviews, review]}))
       }
+      setFormData({
+        rating: "",
+        content: ""
+      })
+      setDefaultReviewRating(10000)
     })
   }
 
@@ -41,19 +47,19 @@ function Reviews({ reviews, userId, productId, productDetail, setProductDetail }
       })}
       <form onSubmit={handleReviewSubmit}> 
         <div onChange={handleChange}>       
-          <input type="radio" id="review_rating1" name="rating" value={1} />
+          <input type="radio" id="review_rating1" name="rating" value={1}/>
           <label htmlFor="review_rating1">1</label><br/>
           
-          <input type="radio" id="review_rating2" name="rating" value={2} />
+          <input type="radio" id="review_rating2" name="rating" value={2}/>
           <label htmlFor="review_rating2">2</label><br/>
         
-          <input type="radio" id="review_rating3" name="rating" value={3} />
+          <input type="radio" id="review_rating3" name="rating" value={3}/>
           <label htmlFor="review_rating3">3</label><br/>
           
-          <input type="radio" id="review_rating4" name="rating" value={4} />
+          <input type="radio" id="review_rating4" name="rating" value={4}/>
           <label htmlFor="review_rating4">4</label><br/>
           
-          <input type="radio" id="review_rating5" name="rating" value={5} />
+          <input type="radio" id="review_rating5" name="rating" value={5}/>
           <label htmlFor="review_rating5">5</label><br/>
         </div>
 

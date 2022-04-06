@@ -33,7 +33,7 @@ function App() {
         r.json().then((errors) => console.log(errors))
       }
     })
-  }, [])
+  }, [user])
 
   return (
     <div>

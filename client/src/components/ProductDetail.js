@@ -4,7 +4,6 @@ import Product from "./Product";
 import Reviews from "./Reviews";
 
 function ProductDetail({ user }) {
-  const match = useRouteMatch()
   const params = useParams()
   const [productDetail, setProductDetail] = useState({})
 

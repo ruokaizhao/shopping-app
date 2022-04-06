@@ -6,8 +6,11 @@ const productReviewsSlice = createSlice({
     entities: {}
   },
   reducers: {
-    reviewAdded(state, action) {
+    productReviewAdded(state, action) {
       state.entities.push(action.payload)
+    },
+    productReviewRemoved(state, action) {
+      
     }
   }
 })

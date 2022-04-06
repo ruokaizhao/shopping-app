@@ -4,12 +4,14 @@ function Review({ review, userId, productDetail, setProductDetail }) {
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
     rating: "",
-    content: ""
+    content: review.content
   })
+  const [defaultReviewRating, setDefaultReviewRating] = useState("")
   const currentUser = userId === review.user_id
 
   function handleEditClick() {
     setIsEditing((isEditing) => !isEditing)
+    setDefaultReviewRating(review.rating)
   }
 
   function handleChange(e) {
@@ -39,7 +41,7 @@ function Review({ review, userId, productDetail, setProductDetail }) {
         })}))
         setFormData({
           rating: "",
-          content: ""
+          content: formData.content
         })
         setIsEditing((isEditing) => !isEditing)
       }
@@ -74,19 +76,19 @@ function Review({ review, userId, productDetail, setProductDetail }) {
       {isEditing ? 
        <form onSubmit={handleReviewSubmit}> 
         <div onChange={handleChange}>       
-          <input type="radio" id="review_rating1" name="rating" value={1} />
+          <input type="radio" id="review_rating1" name="rating" value={1} defaultChecked={defaultReviewRating === 1}/>
           <label htmlFor="review_rating1">1</label><br/>
           
-          <input type="radio" id="review_rating2" name="rating" value={2} />
+          <input type="radio" id="review_rating2" name="rating" value={2} defaultChecked={defaultReviewRating === 2}/>
           <label htmlFor="review_rating2">2</label><br/>
         
-          <input type="radio" id="review_rating3" name="rating" value={3} />
+          <input type="radio" id="review_rating3" name="rating" value={3} defaultChecked={defaultReviewRating === 3}/>
           <label htmlFor="review_rating3">3</label><br/>
           
-          <input type="radio" id="review_rating4" name="rating" value={4} />
+          <input type="radio" id="review_rating4" name="rating" value={4} defaultChecked={defaultReviewRating === 4}/>
           <label htmlFor="review_rating4">4</label><br/>
           
-          <input type="radio" id="review_rating5" name="rating" value={5} />
+          <input type="radio" id="review_rating5" name="rating" value={5} defaultChecked={defaultReviewRating === 5}/>
           <label htmlFor="review_rating5">5</label><br/>
         </div>
 

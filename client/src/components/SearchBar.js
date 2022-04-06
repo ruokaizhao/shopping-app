@@ -21,25 +21,25 @@ function SearchBar({ onSearch }) {
     // "" or " " from other searches, since the search of "" or " " will hit "/search" instead of "/search/:search" route, resulting in
     // RoutingError.
 
-    // if (search.replace(/\s/g, "") === "") {
-    //   fetch("/api/products")
-    //   .then((r) => {
-    //     if (r.ok) {
-    //       r.json().then((products) => onSearch(products))
-    //     } else {
-    //       r.json().then((errors) => console.log(errors))
-    //     }
-    //   })
-    // } else {
-    //   fetch(`api/search/${search}`)
-    //   .then((r) => {
-    //     if (r.ok) {
-    //       r.json().then((products) => onSearch(products))
-    //     } else {
-    //       r.json().then((errors) => console.log(errors))
-    //     }
-    //   })
-    // }
+    if (search.replace(/\s/g, "") === "") {
+      fetch("/api/products")
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((products) => onSearch(products))
+        } else {
+          r.json().then((errors) => console.log(errors))
+        }
+      })
+    } else {
+      fetch(`api/search/${search}`)
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((products) => onSearch(products))
+        } else {
+          r.json().then((errors) => console.log(errors))
+        }
+      })
+    }
   }
 
   return (
