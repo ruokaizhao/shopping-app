@@ -18,7 +18,7 @@ function ProductDetail({ user }) {
     <div>
       <Product product={productDetails} user={user} />
       {productDetails.reviews ?
-      <Reviews reviews={productDetails.reviews} userId={user.id} productId={productDetails.id} setProductDetails={setProductDetails} productDetails={productDetails} />
+      <Reviews userId={user.id} />
       : null}
     </div>
   );

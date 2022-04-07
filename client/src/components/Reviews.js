@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import Review from "./Review";
+import { reviewAdded } from "./productDetailSlice";
+import { useDispatch, useSelector } from 'react-redux';
 
-function Reviews({ reviews, userId, productId, productDetail, setProductDetail }) {
+function Reviews({ userId }) {
   const [formData, setFormData] = useState({
     rating: "",
     content: ""
   })
-  const [defaultReviewRating, setDefaultReviewRating] = useState("")
+  const dispatch = useDispatch()
+  const productDetails = useSelector((state) => state.productDetails.entities)
 
   function handleChange(e) {
     setFormData({...formData, [e.target.name]: e.target.value})
@@ -21,14 +24,14 @@ function Reviews({ reviews, userId, productId, productDetail, setProductDetail }
       },
       body: JSON.stringify({
         user_id: userId,
-        product_id: productId,
+        product_id: productDetails.id,
         rating: formData.rating,
         content: formData.content
       })
     })
     .then((r) => {
       if (r.ok) {
-        r.json().then((review) => setProductDetail({...productDetail, reviews: [...productDetail.reviews, review]}))
+        r.json().then((review) => dispatch(reviewAdded(review)))
       }
       setFormData({
         rating: "",
@@ -39,9 +42,9 @@ function Reviews({ reviews, userId, productId, productDetail, setProductDetail }
 
   return (
     <div>
-      {reviews.map((review) => {
+      {productDetails.reviews.map((review) => {
         return (
-          <Review key={review.id} review={review} userId={userId} setProductDetail={setProductDetail} productDetail={productDetail} />
+          <Review key={review.id} review={review} userId={userId} />
         )
       })}
       <form onSubmit={handleReviewSubmit}> 

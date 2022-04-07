@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { reviewRemoved, reviewUpdated } from './productDetailSlice';
 
-function Review({ review, userId, productDetail, setProductDetail }) {
+function Review({ review, userId }) {
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
     rating: "",
@@ -8,6 +10,7 @@ function Review({ review, userId, productDetail, setProductDetail }) {
   })
   const [defaultReviewRating, setDefaultReviewRating] = useState("")
   const currentUser = userId === review.user_id
+  const dispatch = useDispatch()
 
   function handleEditClick() {
     setIsEditing((isEditing) => !isEditing)
@@ -32,13 +35,7 @@ function Review({ review, userId, productDetail, setProductDetail }) {
     })
     .then((r) => {
       if (r.ok) {
-        r.json().then((reviewReturned) => setProductDetail({...productDetail, reviews: productDetail.reviews.map((data) => {
-          if (data.id === review.id) {
-            return reviewReturned
-          } else {
-            return data
-          }
-        })}))
+        r.json().then((reviewReturned) => dispatch(reviewUpdated(reviewReturned.id)))
         setFormData({
           rating: "",
           content: formData.content
@@ -54,9 +51,7 @@ function Review({ review, userId, productDetail, setProductDetail }) {
     })
     .then((r) => {
       if (r.ok) {
-        setProductDetail({...productDetail, reviews: productDetail.reviews.filter((data) => {
-          return data.id !== review.id
-        })})
+        dispatch(reviewRemoved(review.id))
       }
     })
   }

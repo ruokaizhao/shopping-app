@@ -12,6 +12,17 @@ const productDetailsSlice = createSlice({
     entities: {}
   },
   reducers: {
+    reviewAdded(state, action) {
+      state.entities.reviews.push(action.payload)
+    },
+    reviewRemoved(state, action) {
+      const index = state.entities.reviews.findIndex((review) => review.id === action.payload)
+      state.entities.reviews.splice(index, 1)
+    },
+    reviewUpdated(state, action) {
+      const review = state.entities.reviews.find((review) => review.id === action.payload.id)
+      review.content = action.payload.content
+    }
   },
   extraReducers: {
     [fetchProductDetails.fulfilled](state, action) {
@@ -20,5 +31,5 @@ const productDetailsSlice = createSlice({
   }
 })
 
-export const { } = productDetailsSlice.actions;
+export const { reviewAdded, reviewRemoved, reviewUpdated } = productDetailsSlice.actions;
 export default productDetailsSlice.reducer;
