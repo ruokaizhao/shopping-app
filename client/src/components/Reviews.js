@@ -34,7 +34,6 @@ function Reviews({ reviews, userId, productId, productDetail, setProductDetail }
         rating: "",
         content: ""
       })
-      setDefaultReviewRating(10000)
     })
   }
 

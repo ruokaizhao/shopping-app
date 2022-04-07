@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useRouteMatch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import Product from "./Product";
+import { fetchProductDetails } from './productDetailSlice';
 import Reviews from "./Reviews";
 
 function ProductDetail({ user }) {
   const params = useParams()
-  const [productDetail, setProductDetail] = useState({})
+  const productDetails = useSelector((state) => state.productDetails.entities)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetch(`/api/products/${params.productId}`)
-    .then((r) => {
-      if (r.ok) {
-        r.json().then((product) => setProductDetail(product))
-      }
-    })
+    dispatch(fetchProductDetails(params.productId))
   }, [params.productId])
 
   return (
     <div>
-      <Product product={productDetail} user={user} />
-      {productDetail.reviews ?
-      <Reviews reviews={productDetail.reviews} userId={user.id} productId={productDetail.id} setProductDetail={setProductDetail} productDetail={productDetail} />
+      <Product product={productDetails} user={user} />
+      {productDetails.reviews ?
+      <Reviews reviews={productDetails.reviews} userId={user.id} productId={productDetails.id} setProductDetails={setProductDetails} productDetails={productDetails} />
       : null}
     </div>
   );
