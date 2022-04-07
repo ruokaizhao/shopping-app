@@ -20,8 +20,9 @@ const productDetailsSlice = createSlice({
       state.entities.reviews.splice(index, 1)
     },
     reviewUpdated(state, action) {
-      const review = state.entities.reviews.find((review) => review.id === action.payload.id)
+      const review = state.entities.reviews.find((item) => item.id === action.payload.id)
       review.content = action.payload.content
+      review.rating = action.payload.rating
     }
   },
   extraReducers: {

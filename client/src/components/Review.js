@@ -35,7 +35,7 @@ function Review({ review, userId }) {
     })
     .then((r) => {
       if (r.ok) {
-        r.json().then((reviewReturned) => dispatch(reviewUpdated(reviewReturned.id)))
+        r.json().then((reviewReturned) => dispatch(reviewUpdated(reviewReturned)))
         setFormData({
           rating: "",
           content: formData.content
