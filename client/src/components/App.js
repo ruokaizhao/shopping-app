@@ -37,13 +37,13 @@ function App() {
 
   return (
     <div>
-      <NavBar userId={user.id} />
+      <NavBar user={user} setProducts={setProducts} />
       <Switch>
         <Route path="/signup">
           <Signup onLogin={setUser} />
         </Route>
         <Route path="/logout">
-          <Logout />
+          <Logout setUser={setUser} setProducts={setProducts} />
         </Route>
         <Route path="/login">
           <Login onLogin={setUser} />
@@ -55,7 +55,6 @@ function App() {
           <ProductDetail user={user}/>
         </Route>
         <Route exact path="/">
-          <SearchBar onSearch={setProducts} />
           <Products products={products} user={user} />
         </Route>        
       </Switch>      

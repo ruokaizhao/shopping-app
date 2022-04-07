@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SearchBar({ onSearch }) {
+function SearchBar({ setProducts }) {
   const [search, setSearch] = useState("")
 
   function handleSearchChange(e) {
@@ -12,7 +12,7 @@ function SearchBar({ onSearch }) {
     fetch(`/api/search/${search}`)
     .then((r) => {
       if(r.ok) {
-        r.json().then((products) => onSearch(products))
+        r.json().then((products) => setProducts(products))
       } else {
         r.json().then((errors) => console.log(errors))
       }

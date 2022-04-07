@@ -6,7 +6,7 @@ import { cartAdded, cartUpdated } from './cartSlice';
 function Product({ product, user }) {
   const match = useRouteMatch()
   const dispatch = useDispatch()
-  const { id, title, price, description, image } = product
+  const { id, title, price, description, image, rating } = product
   const carts = useSelector((state) => state.carts.entities)
 
   function handleCartClick() {
@@ -57,21 +57,46 @@ function Product({ product, user }) {
   }
 
   return (
-    <div>
+    <div className="product">
       {match.url === "/" 
       ?
       <Link to={`products/${id}`}>
-        <h2>{title}</h2>      
-        <img src={image} alt={title} />
+        <div className="product__info">
+          <p>{title}</p>
+          <p className="product__price">
+            <small>$</small>
+            <strong>{price}</strong>
+          </p>
+          <div className="product__rating">
+            {Array(rating)
+              .fill()
+              .map((_, i) => (
+                <p>🌟</p>
+              ))}
+          </div>
+        </div>
+        <img src={image} alt="" />
       </Link> 
       : 
       <div>
-        <h2>{title}</h2>      
-        <img src={image} alt={title} />
-      </div>}           
-      <h2>{price}</h2>
+        <div className="product__info">
+          <p>{title}</p>
+          <p className="product__price">
+            <small>$</small>
+            <strong>{price}</strong>
+          </p>
+          <div className="product__rating">
+            {Array(rating)
+              .fill()
+              .map((_, i) => (
+                <p>🌟</p>
+              ))}
+          </div>
+        </div>
+        <img src={image} alt="" />
+      </div>}             
       <button onClick={handleCartClick}>Add to cart</button>            
-    </div>
+    </div>    
   );
 }
 

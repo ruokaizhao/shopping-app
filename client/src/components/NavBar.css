@@ -8,6 +8,10 @@
   z-index: 100;
 }
 
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
 .header__logo {
   width: 100px;
   object-fit: contain;
