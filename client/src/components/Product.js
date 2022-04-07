@@ -1,13 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { cartAdded, cartUpdated } from './cartSlice';
+import { cartAdded, cartUpdated } from '../features/cartSlice';
+import "../styling/Product.css"
 
 function Product({ product, user }) {
   const match = useRouteMatch()
   const dispatch = useDispatch()
   const { id, title, price, description, image, rating } = product
   const carts = useSelector((state) => state.carts.entities)
+  console.log(rating)
 
   function handleCartClick() {
     const productTitlesInCarts = carts.map((item) => item.title)

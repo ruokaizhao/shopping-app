@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Review from "./Review";
-import { reviewAdded } from "./productDetailSlice";
+import { reviewAdded } from "../features/productDetailSlice";
 import { useDispatch, useSelector } from 'react-redux';
 
 function Reviews({ userId }) {

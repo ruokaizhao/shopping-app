@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { reviewRemoved, reviewUpdated } from './productDetailSlice';
+import { reviewRemoved, reviewUpdated } from '../features/productDetailSlice';
 
 function Review({ review, userId }) {
   const [isEditing, setIsEditing] = useState(false)

@@ -3,10 +3,9 @@ import { Switch, Route } from "react-router-dom";
 import Logout from "./Logout";
 import NavBar from "./NavBar";
 import Signup from "./Signup";
-import Products from "./Products";
+import Home from "./Home";
 import Login from "./Login";
 import Cart from "./Carts";
-import SearchBar from "./SearchBar";
 import ProductDetail from "./ProductDetail";
 
 function App() {
@@ -55,7 +54,7 @@ function App() {
           <ProductDetail user={user}/>
         </Route>
         <Route exact path="/">
-          <Products products={products} user={user} />
+          <Home products={products} user={user} />
         </Route>        
       </Switch>      
     </div>

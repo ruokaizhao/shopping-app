@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Product from "./Product";
-import { fetchProductDetails } from './productDetailSlice';
+import { fetchProductDetails } from '../features/productDetailSlice';
 import Reviews from "./Reviews";
 
 function ProductDetail({ user }) {

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCarts } from './cartSlice';
+import { fetchCarts } from '../features/cartSlice';
 import SearchBar from './SearchBar';
 
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import "./NavBar.css"
+import "../styling/NavBar.css"
 
 function NavBar({ user, setProducts }) {
   const carts = useSelector((state) => state.carts.entities)
