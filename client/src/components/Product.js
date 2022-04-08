@@ -9,7 +9,6 @@ function Product({ product, user }) {
   const dispatch = useDispatch()
   const { id, title, price, description, image, rating } = product
   const carts = useSelector((state) => state.carts.entities)
-  console.log(rating)
 
   function handleCartClick() {
     const productTitlesInCarts = carts.map((item) => item.title)

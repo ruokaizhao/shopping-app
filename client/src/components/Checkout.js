@@ -11,7 +11,7 @@ function Checkout({ userId }) {
     state: "",
     zipcode: ""
   })
-  const [isEditing, setIsEditing] = useState(formData.fullname)
+  const [isEditing, setIsEditing] = useState(formData.fullname === "")
   const [isPlaced, setIsPlaced] = useState(true)
   
   const carts = useSelector((state) => state.carts.entities)
@@ -24,8 +24,10 @@ function Checkout({ userId }) {
     .then((r) => {
       if (r.ok) {
         r.json().then((address) => {
-          setFormData(address)
-          setIsEditing(formData.fullname)
+          if (address !== null) {
+            setFormData(address)
+            setIsEditing(formData.fullname === "")
+          }          
         })
       } else {
         r.json().then((errors) => console.log(errors))
@@ -52,6 +54,7 @@ function Checkout({ userId }) {
       const {id, ...cartNoId} = cart
       postOrder(cartNoId)
       deleteCart(cart.id)
+      setIsPlaced((isPlaced) => !isPlaced)
     })
   }
 

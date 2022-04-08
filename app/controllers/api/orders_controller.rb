@@ -3,7 +3,7 @@ class Api::OrdersController < ApplicationController
   def index
     user = User.find(params[:user_id])
     orders = user.orders
-    render json: order, status: :ok
+    render json: orders, status: :ok
   end
 
   def create
