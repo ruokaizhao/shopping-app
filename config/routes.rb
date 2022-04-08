@@ -10,8 +10,9 @@ Rails.application.routes.draw do
     resources :carts, only: [:create, :destroy, :update]
     resources :reviews, only: [:create, :update, :destroy]
     resources :orders, only: [:create, :index]
-    resources :addresses, only: [:create, :index]
+    resources :addresses, only: [:create]
 
+    get "/addresses/:user_id", to: "addresses#index"
     get "/search/:search", to: "products#search"
     # The "" and " " search will hit "/search" route.
     get "/search", to: "products#index"

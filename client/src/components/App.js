@@ -55,7 +55,7 @@ function App() {
           <ProductDetail user={user}/>
         </Route>
         <Route path="/checkout">
-          <Checkout />
+          <Checkout userId={user.id} />
         </Route>
         <Route exact path="/">
           <Home products={products} user={user} />

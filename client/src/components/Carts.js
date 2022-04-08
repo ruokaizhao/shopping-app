@@ -12,7 +12,7 @@ function Cart() {
 
   return (
     <div>
-      <p>Total: {total}</p>
+      <p>Total price: {total}</p>
       {carts.map((productInCart) => {
         return (
           <ProductInCart key={productInCart.id} productInCart={productInCart} />
