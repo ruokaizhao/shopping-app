@@ -5,34 +5,39 @@ import { cartRemoved } from '../features/cartSlice';
 
 function Checkout({ userId }) {
   const [formData, setFormData] = useState({
+    id: "",
     fullname: "",
     street: "",
     city: "",
     state: "",
     zipcode: ""
   })
+  console.log(formData)
   const [isEditing, setIsEditing] = useState(formData.fullname === "")
-  const [isPlaced, setIsPlaced] = useState(true)
-  
+  const [isPlaced, setIsPlaced] = useState(true)  
   const carts = useSelector((state) => state.carts.entities)
   const total = carts.reduce((previous, current) => previous + current.price * current.quantity, 0)
   const dispatch = useDispatch()
   const history = useHistory()
 
   useEffect(() => {
-    fetch(`/api/users/${userId}/addresses`)
-    .then((r) => {
-      if (r.ok) {
-        r.json().then((address) => {
-          if (address !== null) {
-            setFormData(address)
-            setIsEditing(formData.fullname === "")
-          }          
-        })
-      } else {
-        r.json().then((errors) => console.log(errors))
-      }
-    })
+    if (userId) {
+      fetch(`/api/users/${userId}/addresses`)
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((address) => {
+            if (address !== null) {
+              setFormData(address)
+              setIsEditing(false)
+              // Why does the below code log empty formData?
+              console.log(formData)
+            }          
+          })
+        } else {
+          r.json().then((errors) => console.log(errors))
+        }
+      })
+    }    
   }, [userId])
 
   function handleKeepShoppingClick() {

@@ -4,13 +4,15 @@ function OrderHistory({ user }) {
   const [orders, setOrders] = useState([])
 
   useEffect(() => {
-    fetch(`/api/users/${user.id}/orders`)
-    .then((r) => {
-      if (r.ok) {
-        r.json().then((orders) => setOrders(orders))
-      }
-    })
-  }, [user])
+    if (user.id) {
+      fetch(`/api/users/${user.id}/orders`)
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((orders) => setOrders(orders))
+        }
+      })
+    }    
+  }, [user.id])
 
   return (
     <div>

@@ -7,13 +7,13 @@ class Api::AddressesController < ApplicationController
   end
 
   def create
-    address = Address.create!(address_permit)
+    address = Address.create!(address_params)
     render json: address, status: :created
   end
 
   private
 
-  def address_permit
+  def address_params
     params.permit(:fullname, :street, :city, :state, :zipcode, :user_id)
   end
 

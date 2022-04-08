@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users, only: [] do
       resources :carts, only: [:index]
-      resources :addresss, only: [:index]
+      resources :addresses, only: [:index]
       resources :orders, only: [:index]
     end
     resources :products, only: [:index, :show]
