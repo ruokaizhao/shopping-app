@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { cartRemoved, cartUpdated } from '../features/cartSlice';
 
 function ProductInCart({ productInCart }) {
@@ -67,10 +66,7 @@ function ProductInCart({ productInCart }) {
       ? <button onClick={handleMinusCartClick}>-</button>
       : <button onClick={handleRemoveCartClick}>Remove from cart</button>
       }
-      <button onClick={handleAddCartClick}>+</button>
-      <Link to="/checkout">
-        <button>Checkout</button>
-      </Link>             
+      <button onClick={handleAddCartClick}>+</button>           
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ProductInCart from "./ProductInCart";
 
 function Cart() {
@@ -17,7 +18,10 @@ function Cart() {
         return (
           <ProductInCart key={productInCart.id} productInCart={productInCart} />
         )
-      })}      
+      })}
+      <Link to="/checkout">
+        <button>Checkout</button>
+      </Link>     
     </div>
   );
 }
