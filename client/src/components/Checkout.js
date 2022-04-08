@@ -20,7 +20,7 @@ function Checkout({ userId }) {
   const history = useHistory()
 
   useEffect(() => {
-    fetch(`/api/addresses/${userId}`)
+    fetch(`/api/users/${userId}/addresses`)
     .then((r) => {
       if (r.ok) {
         r.json().then((address) => {

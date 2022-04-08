@@ -4,7 +4,7 @@ function OrderHistory({ user }) {
   const [orders, setOrders] = useState([])
 
   useEffect(() => {
-    fetch(`/api/orders/${user.id}`)
+    fetch(`/api/users/${user.id}/orders`)
     .then((r) => {
       if (r.ok) {
         r.json().then((orders) => setOrders(orders))

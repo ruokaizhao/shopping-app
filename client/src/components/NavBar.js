@@ -50,7 +50,7 @@ function NavBar({ user, setProducts }) {
             </span>
           </div> : 
           <div className="header__option">
-            <span className="header__optionLineOne">Hello {user.name}</span>
+            <span className="header__optionLineOne">Hello guest</span>
             <span className="header__optionLineTwo">
               <NavLink to="/login">Login</NavLink><br/>
               <NavLink to="/signup">Signup</NavLink>

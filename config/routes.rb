@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users, only: [] do
       resources :carts, only: [:index]
+      resources :addresss, only: [:index]
+      resources :orders, only: [:index]
     end
     resources :products, only: [:index, :show]
     resources :carts, only: [:create, :destroy, :update]
@@ -12,8 +14,6 @@ Rails.application.routes.draw do
     resources :orders, only: [:create]
     resources :addresses, only: [:create]
 
-    get "/orders/:user_id", to: "orders#index"
-    get "/addresses/:user_id", to: "addresses#index"
     get "/search/:search", to: "products#search"
     # The "" and " " search will hit "/search" route.
     get "/search", to: "products#index"
