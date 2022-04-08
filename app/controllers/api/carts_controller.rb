@@ -28,7 +28,7 @@ class Api::CartsController < ApplicationController
   private
 
   def cart_params
-    params.permit(:title, :price, :rating, :description, :image, :user_id, :quantity)
+    params.permit(:title, :price, :description, :image, :user_id, :quantity)
   end
 
   def render_unprocessable_entity_response(invalid)

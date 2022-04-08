@@ -7,6 +7,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Cart from "./Carts";
 import ProductDetail from "./ProductDetail";
+import Checkout from "./Checkout";
 
 function App() {
   const [user, setUser] = useState({})
@@ -52,6 +53,9 @@ function App() {
         </Route>
         <Route path="/products/:productId">
           <ProductDetail user={user}/>
+        </Route>
+        <Route path="/checkout">
+          <Checkout />
         </Route>
         <Route exact path="/">
           <Home products={products} user={user} />

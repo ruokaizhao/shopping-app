@@ -3,15 +3,14 @@ Rails.application.routes.draw do
   # controllers into it. Also, in each namespaced controller, you need to add Api:: in front of the controller's name:
   # class Api::CartsController < ApplicationController instead of class CartsController < ApplicationController
   namespace :api do
-    resources :products, only: [:index, :show]
-
     resources :users, only: [] do
       resources :carts, only: [:index]
     end
-
+    resources :products, only: [:index, :show]
     resources :carts, only: [:create, :destroy, :update]
-
     resources :reviews, only: [:create, :update, :destroy]
+    resources :orders, only: [:create, :index]
+    resources :addresses, only: [:create, :index]
 
     get "/search/:search", to: "products#search"
     # The "" and " " search will hit "/search" route.
