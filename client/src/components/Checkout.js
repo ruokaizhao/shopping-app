@@ -11,7 +11,7 @@ function Checkout({ userId }) {
     state: "",
     zipcode: ""
   })
-  const [isEditing, setIsEditing] = useState(formData.fullname === "")
+  const [isEditing, setIsEditing] = useState(formData.fullname)
   const [isPlaced, setIsPlaced] = useState(true)
   
   const carts = useSelector((state) => state.carts.entities)
@@ -21,6 +21,16 @@ function Checkout({ userId }) {
 
   useEffect(() => {
     fetch(`/api/addresses/${userId}`)
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((address) => {
+          setFormData(address)
+          setIsEditing(formData.fullname)
+        })
+      } else {
+        r.json().then((errors) => console.log(errors))
+      }
+    })
   }, [userId])
 
   function handleKeepShoppingClick() {
@@ -82,16 +92,16 @@ function Checkout({ userId }) {
         {isEditing
         ?
         <form onSubmit={handleCheckoutSubmit}>
-          <input type="text" id="fullname" name="fullname" value={formData.fullname} onChange={handleChange}/><br/>
           <label htmlFor="fullname">Name:</label><br/>
-          <input type="text" id="street" name="street" value={formData.street} onChange={handleChange}/><br/>
+          <input type="text" id="fullname" name="fullname" value={formData.fullname} onChange={handleChange}/><br/>
           <label htmlFor="street">Street:</label><br/>
-          <input type="text" id="city" name="city" value={formData.city} onChange={handleChange}/><br/>
+          <input type="text" id="street" name="street" value={formData.street} onChange={handleChange}/><br/>
           <label htmlFor="city">City:</label><br/>
-          <input type="text" id="state" name="state" value={formData.state} onChange={handleChange}/><br/>
+          <input type="text" id="city" name="city" value={formData.city} onChange={handleChange}/><br/>
           <label htmlFor="state">State:</label><br/>
-          <input type="text" id="zipcode" name="zipcode" value={formData.zipcode} onChange={handleChange}/><br/>
+          <input type="text" id="state" name="state" value={formData.state} onChange={handleChange}/><br/>
           <label htmlFor="zipcode">Zip code:</label><br/>
+          <input type="text" id="zipcode" name="zipcode" value={formData.zipcode} onChange={handleChange}/><br/>          
           <button type="submit">Place your order</button>
         </form>
         :

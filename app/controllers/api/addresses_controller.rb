@@ -1,7 +1,7 @@
 class Api::AddressesController < ApplicationController
 
   def index
-    user = User.find(params[:userId])
+    user = User.find(params[:user_id])
     address = user.address
     render json: address, status: :ok
   end
