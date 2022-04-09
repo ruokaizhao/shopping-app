@@ -13,10 +13,11 @@ function OrderHistory({ user }) {
       })
     }    
   }, [user.id])
+  console.log(orders)
 
   return (
     <div>
-      {orders !== []
+      {orders.length !== 0
       ?
       <div>
         {orders.map((order) => {
