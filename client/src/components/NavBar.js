@@ -3,10 +3,8 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCarts } from '../features/cartSlice';
 import SearchBar from './SearchBar';
-
-import SearchIcon from "@material-ui/icons/Search";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import "../styling/NavBar.css"
+import { Grid, Typography } from '@mui/material';
+import { AppBar, Toolbar } from "@mui/material";
 
 function NavBar({ user, setProducts }) {
   const carts = useSelector((state) => state.carts.entities)
@@ -26,73 +24,48 @@ function NavBar({ user, setProducts }) {
 
   return (
     <div>
-      
+      <AppBar position="static" >
+        <Toolbar >
+          <Grid container>
 
-      <div className="header">
-
-      <NavLink to="/">      
-        <img className="header__logo" src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="Home page"/>
-      </NavLink>
-      
-
-      <div className="header__search">
-        <input className="header__searchInput" type="text" />
-        <SearchIcon className="header__searchIcon" />
-        <SearchBar setProducts={setProducts} />
-      </div>
-
-      <div className="header__nav">
-        {user.id ? 
-          <div className="header__option">
-            <span className="header__optionLineOne">Hello {user.name}</span>
-            <span className="header__optionLineTwo">
-              <NavLink to="/logout">Logout</NavLink>
-            </span>
-          </div> : 
-          <div className="header__option">
-            <span className="header__optionLineOne">Hello guest</span>
-            <span className="header__optionLineTwo">
-              <NavLink to="/login">Login</NavLink><br/>
-              <NavLink to="/signup">Signup</NavLink>
-            </span>
-          </div>}
-        
-          
-        
-
-        
-          <div className="header__option">
+            <Grid item xs={1}>
+              <NavLink to="/">
+                <Typography>
+                  Home
+                </Typography>             
+              </NavLink>
+            </Grid>
             
-              <span className="header__optionLineOne">
-                <NavLink to="/orders">
-                  Returns
-                </NavLink>
-              </span>
-              <span className="header__optionLineTwo">
-                <NavLink to="/orders">
-                  & Orders
-                </NavLink>
-              </span>
-            
-          </div>
-        
-        
+            <Grid item xs={8} >
+              <SearchBar setProducts={setProducts} />
+            </Grid>
 
-        <div className="header__option">
-          <span className="header__optionLineOne">Your</span>
-          <span className="header__optionLineTwo">Prime</span>
-        </div>
+            <Grid item xs={1} >
+              {user.id ? 
+              <div>
+                Hello, <strong>{user.name}</strong><br/>
+                <NavLink to="/logout">Logout</NavLink>
+              </div> : 
+              <div>
+                Hello, <strong>guest</strong><br/>
+                <NavLink to="/login">Login</NavLink><br/>
+                <NavLink to="/signup">Signup</NavLink><br/>
+              </div>}  
+            </Grid>
 
-        
-          <div className="header__optionBasket">
-            <ShoppingBasketIcon />
-            <span className="header__optionLineTwo header__basketCount">
-            <NavLink to="/carts">{itemsInCarts}</NavLink>
-            </span>
-          </div>
-        
-      </div>
-    </div>    
+            <Grid item xs={1} >
+              <NavLink to="/orders">
+              Orders History
+              </NavLink> 
+            </Grid>
+
+            <Grid item xs={1} >
+              <NavLink to="/carts">Cart: {itemsInCarts}</NavLink>
+            </Grid>
+
+          </Grid> 
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }

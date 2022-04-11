@@ -40,10 +40,6 @@ function Checkout({ userId }) {
     }    
   }, [userId])
 
-  function handleKeepShoppingClick() {
-    history.push("/")
-  }
-
   function handleChange(e) {
     setFormData({...formData, [e.target.name]: e.target.value})
   }
@@ -128,7 +124,7 @@ function Checkout({ userId }) {
       :
       <div>
         <p>We have received your order, you will be notified when the order is dispatched, thank you for being our customer!</p>
-        <button onClick={handleKeepShoppingClick}>Keep shopping?</button>
+        <button onClick={() => history.push("/")}>Keep shopping?</button>
       </div>
       }    
     </div>
