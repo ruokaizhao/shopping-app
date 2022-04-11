@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { cartAdded, cartUpdated } from '../features/cartSlice';
-import { styled } from '@mui/material/styles';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography } from '@mui/material';
 import { red } from '@mui/material/colors';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
