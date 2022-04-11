@@ -2,8 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { cartAdded, cartUpdated } from '../features/cartSlice';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography } from '@mui/material';
-import { red } from '@mui/material/colors';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Rating } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 function Product({ product, user }) {
@@ -73,10 +72,7 @@ function Product({ product, user }) {
             }        
             title={title}
             subheader={
-              <>
                 <strong>Price: ${price}</strong>
-                <strong>Rating: {rating}</strong>
-              </>
             }
           />
           <CardMedia
@@ -88,9 +84,7 @@ function Product({ product, user }) {
         </Link>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            This impressive paella is a perfect party dish and a fun meal to cook
-            together with your guests. Add 1 cup of frozen peas along with the mussels,
-            if you like.
+            <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly />
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -104,12 +98,14 @@ function Product({ product, user }) {
         <Card sx={{ maxWidth: 500, height: 600 }}>
           <CardHeader
             avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                R
+              <Avatar aria-label="recipe">
+                <img src={image} alt={title} />
               </Avatar>
             }        
             title={title}
-            subheader={<strong>Price: ${price}</strong>}
+            subheader={
+                <strong>Price: ${price}</strong>
+            }
           />
           <CardMedia
             component="img"
@@ -117,19 +113,17 @@ function Product({ product, user }) {
             image={image}
             alt={title}
           />
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              This impressive paella is a perfect party dish and a fun meal to cook
-              together with your guests. Add 1 cup of frozen peas along with the mussels,
-              if you like.
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            <IconButton aria-label="add shopping cart" onClick={handleCartClick} >
-              <AddShoppingCartIcon/>
-            </IconButton>       
-          </CardActions>          
-        </Card>
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+            <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly />
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add shopping cart" onClick={handleCartClick} >
+            <AddShoppingCartIcon />
+          </IconButton>       
+        </CardActions>          
+      </Card>
       </div>}           
     </div>    
   );

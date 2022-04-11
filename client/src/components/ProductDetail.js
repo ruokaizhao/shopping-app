@@ -12,7 +12,7 @@ function ProductDetail({ user }) {
 
   useEffect(() => {
     dispatch(fetchProductDetails(params.productId))
-  }, [params.productId])
+  }, [])
 
   return (
     <div>

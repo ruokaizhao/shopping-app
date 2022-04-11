@@ -10,10 +10,12 @@ import ProductDetail from "./ProductDetail";
 import Checkout from "./Checkout";
 import OrderHistory from "./OrderHistory";
 import { Grid } from "@mui/material";
+import { useSelector } from "react-redux";
 
 function App() {
   const [user, setUser] = useState({})
   const [products, setProducts] = useState([])
+  const productDetails = useSelector((state) => state.productDetails.entities)
 
   useEffect(() => {
     fetch("/api/me")
@@ -35,7 +37,7 @@ function App() {
         r.json().then((errors) => console.log(errors))
       }
     })
-  }, [user])
+  }, [user, productDetails])
 
   return (
     <div>
@@ -59,7 +61,7 @@ function App() {
               <Cart />
             </Route>
             <Route path="/products/:productId">
-              <ProductDetail user={user}/>
+              <ProductDetail user={user} products={products}/>
             </Route>
             <Route path="/checkout">
               <Checkout userId={user.id} />

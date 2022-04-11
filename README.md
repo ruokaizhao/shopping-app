@@ -1,0 +1,1 @@
+In the package.json file, the node used for engines needs to be 16.14.2, otherwiese if it is >14, heroku will use the latest version which is now 17.9, and that will cause error.

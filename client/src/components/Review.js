@@ -1,3 +1,4 @@
+import { Rating } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { reviewRemoved, reviewUpdated } from '../features/productDetailSlice';
@@ -8,13 +9,11 @@ function Review({ review, userId }) {
     rating: "",
     content: review.content
   })
-  const [defaultReviewRating, setDefaultReviewRating] = useState("")
   const currentUser = userId === review.user_id
   const dispatch = useDispatch()
 
   function handleEditClick() {
     setIsEditing((isEditing) => !isEditing)
-    setDefaultReviewRating(review.rating)
   }
 
   function handleChange(e) {
@@ -29,7 +28,7 @@ function Review({ review, userId }) {
         "Content-type": "application/json"
       },
       body: JSON.stringify({
-        rating: formData.rating,
+        rating: parseInt(formData.rating),
         content: formData.content
       })
     })
@@ -70,25 +69,14 @@ function Review({ review, userId }) {
       : null}
       {isEditing ? 
        <form onSubmit={handleReviewSubmit}> 
-        <div onChange={handleChange}>       
-          <input type="radio" id="review_rating1" name="rating" value={1} defaultChecked={defaultReviewRating === 1}/>
-          <label htmlFor="review_rating1">1</label><br/>
-          
-          <input type="radio" id="review_rating2" name="rating" value={2} defaultChecked={defaultReviewRating === 2}/>
-          <label htmlFor="review_rating2">2</label><br/>
-        
-          <input type="radio" id="review_rating3" name="rating" value={3} defaultChecked={defaultReviewRating === 3}/>
-          <label htmlFor="review_rating3">3</label><br/>
-          
-          <input type="radio" id="review_rating4" name="rating" value={4} defaultChecked={defaultReviewRating === 4}/>
-          <label htmlFor="review_rating4">4</label><br/>
-          
-          <input type="radio" id="review_rating5" name="rating" value={5} defaultChecked={defaultReviewRating === 5}/>
-          <label htmlFor="review_rating5">5</label><br/>
-        </div>
+        <Rating
+          name="rating"
+          value={parseInt(formData.rating)}
+          onChange={handleChange}
+        />
 
         <label htmlFor="review_content">Enter your review:</label><br/>
-        <textarea id="review_content" name="content" value={formData.content} onChange={handleChange}/><br/>
+        <textarea id="review_content" name="content" defaultValue={formData.content} onChange={handleChange}/><br/>
         
         <button type="submit">Submit your review</button>
       </form>
