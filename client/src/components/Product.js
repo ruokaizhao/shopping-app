@@ -90,8 +90,8 @@ function Product({ product, user }) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add shopping cart">
-            <AddShoppingCartIcon onClick={handleCartClick} />
+          <IconButton aria-label="add shopping cart" onClick={handleCartClick} >
+            <AddShoppingCartIcon />
           </IconButton>       
         </CardActions>          
       </Card>
@@ -121,8 +121,8 @@ function Product({ product, user }) {
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="add shopping cart">
-              <AddShoppingCartIcon onClick={handleCartClick} />
+            <IconButton aria-label="add shopping cart" onClick={handleCartClick} >
+              <AddShoppingCartIcon/>
             </IconButton>       
           </CardActions>          
         </Card>
