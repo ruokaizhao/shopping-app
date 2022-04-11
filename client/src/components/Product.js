@@ -72,7 +72,12 @@ function Product({ product, user }) {
               </Avatar>
             }        
             title={title}
-            subheader={<strong>Price: ${price}</strong>}
+            subheader={
+              <>
+                <strong>Price: ${price}</strong>
+                <strong>Rating: {rating}</strong>
+              </>
+            }
           />
           <CardMedia
             component="img"
