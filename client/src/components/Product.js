@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { cartAdded, cartUpdated } from '../features/cartSlice';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Rating } from '@mui/material';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Rating, CardActionArea } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 function Product({ product, user }) {
@@ -62,26 +62,28 @@ function Product({ product, user }) {
     <div>
       {match.url === "/" 
       ?
-      <Card sx={{ maxWidth: 500, height: 600 }}>
-        <Link to={`products/${id}`}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="recipe">
-                <img src={image} alt={title} />
-              </Avatar>
-            }        
-            title={title}
-            subheader={
-                <strong>Price: ${price}</strong>
-            }
-          />
-          <CardMedia
-            component="img"
-            height="300"
-            image={image}
-            alt={title}
-          />
-        </Link>
+      <Card sx={{ maxWidth: 500, height: 600 }} variant="outlined">
+        <CardActionArea >        
+          <Link to={`products/${id}`}>
+            <CardHeader
+              avatar={
+                <Avatar aria-label="recipe">
+                  <img src={image} alt={title} />
+                </Avatar>
+              }        
+              title={title}
+              subheader={
+                  <strong>Price: ${price}</strong>
+              }
+            />
+            <CardMedia
+              component="img"
+              height="300"
+              image={image}
+              alt={title}
+            />
+          </Link>
+        </CardActionArea>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly />

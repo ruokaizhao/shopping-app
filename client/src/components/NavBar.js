@@ -3,8 +3,9 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCarts } from '../features/cartSlice';
 import SearchBar from './SearchBar';
-import { Grid, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { AppBar, Toolbar } from "@mui/material";
+import Search from "./Search";
 
 function NavBar({ user, setProducts }) {
   const carts = useSelector((state) => state.carts.entities)
@@ -28,7 +29,7 @@ function NavBar({ user, setProducts }) {
         <Toolbar >
           <Grid container>
 
-            <Grid item xs={1}>
+            <Grid item >
               <NavLink to="/">
                 <Typography>
                   Home
@@ -36,36 +37,47 @@ function NavBar({ user, setProducts }) {
               </NavLink>
             </Grid>
             
-            <Grid item xs={8} >
+            <Grid item sx={{flexGrow: 1, marginLeft: 2, marginRight: 2}} >
               <SearchBar setProducts={setProducts} />
             </Grid>
 
-            <Grid item xs={1} >
-              {user.id ? 
-              <div>
-                Hello, <strong>{user.name}</strong><br/>
-                <NavLink to="/logout">Logout</NavLink>
-              </div> : 
-              <div>
-                Hello, <strong>guest</strong><br/>
-                <NavLink to="/login">Login</NavLink><br/>
-                <NavLink to="/signup">Signup</NavLink><br/>
-              </div>}  
-            </Grid>
-
-            <Grid item xs={1} >
+            <Grid item sx={{marginRight: 2}} >
               <NavLink to="/orders">
-              Orders History
+                <Button color="secondary">
+                  Purchase History
+                </Button>
               </NavLink> 
             </Grid>
 
-            <Grid item xs={1} >
-              <NavLink to="/carts">Cart: {itemsInCarts}</NavLink>
+            <Grid item sx={{marginRight: 2}} >
+              <NavLink to="/carts">
+                <Button color="secondary">
+                  Cart: {itemsInCarts}
+                </Button>
+              </NavLink>
+            </Grid>
+
+            <Grid item >
+              {user.id ? 
+              <div>
+                Hello, <strong>{user.name}</strong>
+                <NavLink to="/logout">
+                  <Button color="secondary">
+                    Logout
+                  </Button>
+                </NavLink>
+              </div> : 
+              <div>
+                Hello, <strong>guest</strong>
+                <NavLink to="/login">Login</NavLink>
+                <NavLink to="/signup">Signup</NavLink><br/>
+              </div>}  
             </Grid>
 
           </Grid> 
         </Toolbar>
       </AppBar>
+      {/* <Search /> */}
     </div>
   );
 }

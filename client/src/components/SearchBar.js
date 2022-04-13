@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import React, { useState } from 'react';
 
 function SearchBar({ setProducts }) {
@@ -45,8 +46,9 @@ function SearchBar({ setProducts }) {
   return (
     <div>
       <form onSubmit={handleSearchSubmit}>
-        <input type="text" id="searchbar" name="searchbar" value={search} onChange={handleSearchChange} />
-        <button type="submit">Search</button>
+        {/* <input type="text" id="searchbar" name="searchbar" value={search} onChange={handleSearchChange} />        
+        <button type="submit">Search</button> */}
+        <TextField variant="standard" color="secondary" fullWidth />
       </form>
       
     </div>

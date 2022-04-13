@@ -9,8 +9,16 @@ import Cart from "./Carts";
 import ProductDetail from "./ProductDetail";
 import Checkout from "./Checkout";
 import OrderHistory from "./OrderHistory";
-import { Grid } from "@mui/material";
+import { createTheme, Grid, Paper, ThemeProvider } from "@mui/material";
 import { useSelector } from "react-redux";
+import { green } from "@mui/material/colors";
+
+const theme = createTheme({
+  palette: {
+    primary: green,
+    // mode: "dark"
+    }
+});
 
 function App() {
   const [user, setUser] = useState({})
@@ -41,43 +49,43 @@ function App() {
 
   return (
     <div>
-      <Grid container direction="column" spacing={8}>
-        <Grid item >          
-          <NavBar user={user} setProducts={setProducts} />                  
-        </Grid>  
-
-        <Grid item>
-          <Switch>
-            <Route path="/signup">
-              <Signup onLogin={setUser} />
-            </Route>
-            <Route path="/logout">
-              <Logout setUser={setUser} setProducts={setProducts} />
-            </Route>
-            <Route path="/login">
-              <Login onLogin={setUser} />
-            </Route>
-            <Route path="/carts">
-              <Cart />
-            </Route>
-            <Route path="/products/:productId">
-              <ProductDetail user={user} products={products}/>
-            </Route>
-            <Route path="/checkout">
-              <Checkout userId={user.id} />
-            </Route>
-            <Route path="/orders">
-              <OrderHistory user={user} />
-            </Route>
-            <Route exact path="/">
-              <Home products={products} user={user} />
-            </Route>        
-          </Switch> 
-        </Grid>         
-      
-          
-      </Grid>   
-        
+      <ThemeProvider theme={theme} >
+        <Paper >
+          <Grid container direction="column" spacing={4}>
+            <Grid item >          
+              <NavBar user={user} setProducts={setProducts} />                  
+            </Grid>
+            <Grid item>
+              <Switch>
+                <Route path="/signup">
+                  <Signup onLogin={setUser} />
+                </Route>
+                <Route path="/logout">
+                  <Logout setUser={setUser} setProducts={setProducts} />
+                </Route>
+                <Route path="/login">
+                  <Login onLogin={setUser} />
+                </Route>
+                <Route path="/carts">
+                  <Cart />
+                </Route>
+                <Route path="/products/:productId">
+                  <ProductDetail user={user} products={products} />
+                </Route>
+                <Route path="/checkout">
+                  <Checkout userId={user.id} />
+                </Route>
+                <Route path="/orders">
+                  <OrderHistory user={user} />
+                </Route>
+                <Route exact path="/">
+                  <Home products={products} user={user} />
+                </Route>        
+              </Switch> 
+            </Grid>         
+          </Grid>   
+        </Paper>        
+      </ThemeProvider>        
     </div>
   )
 }

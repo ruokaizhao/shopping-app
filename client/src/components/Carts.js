@@ -13,15 +13,22 @@ function Cart() {
 
   return (
     <div>
-      <p>Total price: {total}</p>
-      {carts.map((productInCart) => {
-        return (
-          <ProductInCart key={productInCart.id} productInCart={productInCart} />
-        )
-      })}
-      <Link to="/checkout">
-        <button>Checkout</button>
-      </Link>     
+      {total > 0 
+      ?
+      <>      
+        <p>Total price: {total}</p>
+        {carts.map((productInCart) => {
+          return (
+            <ProductInCart key={productInCart.id} productInCart={productInCart} />
+          )
+        })}
+        <Link to="/checkout">
+          <button>Checkout</button>
+        </Link> 
+      </> 
+      :
+      <p>There is nothing in the cart.</p>}
+         
     </div>
   );
 }
