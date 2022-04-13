@@ -6,7 +6,7 @@ import { reviewRemoved, reviewUpdated } from '../features/productDetailSlice';
 function Review({ review, userId }) {
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
-    rating: "",
+    rating: review.rating,
     content: review.content
   })
   const currentUser = userId === review.user_id
@@ -35,10 +35,6 @@ function Review({ review, userId }) {
     .then((r) => {
       if (r.ok) {
         r.json().then((reviewReturned) => dispatch(reviewUpdated(reviewReturned)))
-        setFormData({
-          rating: "",
-          content: formData.content
-        })
         setIsEditing((isEditing) => !isEditing)
       }
     })
@@ -71,7 +67,7 @@ function Review({ review, userId }) {
        <form onSubmit={handleReviewSubmit}> 
         <Rating
           name="rating"
-          value={parseInt(formData.rating)}
+          defaultValue={parseInt(formData.rating)}
           onChange={handleChange}
         />
 

@@ -1,6 +1,10 @@
+import { Button } from '@mui/material';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { cartRemoved, cartUpdated } from '../features/cartSlice';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Rating, CardActionArea } from '@mui/material';
 
 function ProductInCart({ productInCart }) {
   const dispatch = useDispatch()
@@ -56,18 +60,49 @@ function ProductInCart({ productInCart }) {
     })
   }
 
-  return (
-    <div>
-      <h2>Title: {productInCart.title}</h2>
-      <h2>Price: {productInCart.price}</h2>
-      <h2>Quantity: {productInCart.quantity}</h2>
-      <img src={productInCart.image} alt={productInCart.title} />
-      {productInCart.quantity > 1 
-      ? <button onClick={handleMinusCartClick}>-</button>
-      : <button onClick={handleRemoveCartClick}>Remove from cart</button>
-      }
-      <button onClick={handleAddCartClick}>+</button>           
-    </div>
+  return (   
+
+    <div>      
+      <div>
+        <Card sx={{ maxWidth: 500, height: 600 }}>
+          <CardHeader
+            avatar={
+              <Avatar aria-label="recipe">
+                <img src={productInCart.image} alt={productInCart.title} />
+              </Avatar>
+            }        
+            title={productInCart.title}
+            subheader={
+                <strong>Price: ${productInCart.price}</strong>
+            }
+          />
+          <CardMedia
+            component="img"
+            height="300"
+            image={productInCart.image}
+            alt={productInCart.title}
+          />
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+            <Rating name="half-rating-read" value={parseFloat(productInCart.rating)} precision={0.5} readOnly />
+          </Typography>
+        </CardContent>
+
+        <CardActions >
+        {productInCart.quantity > 1 
+        ? <IconButton aria-label="add shopping cart" onClick={handleMinusCartClick} >
+            <RemoveIcon />
+          </IconButton> 
+        : <Button variant="contained" onClick={handleRemoveCartClick}>Remove from cart</Button>
+        }
+          <IconButton aria-label="add shopping cart" onClick={handleAddCartClick} >
+            <AddIcon />
+          </IconButton>  
+                
+        </CardActions>          
+      </Card>
+      </div>           
+    </div>    
   );
 }
 

@@ -8,7 +8,7 @@ function Home({ products, user }) {
     <div>
       <Grid container >
         <Grid item xs={0} md={1} />
-        <Grid item container xs={12} md={10} spacing={12}>
+        <Grid item container xs={12} md={10} spacing={4}>
           {products.map((product) => {
             return(
               <Grid key={product.id} item xs={12} sm={6} md={4}>

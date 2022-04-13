@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Product from "./Product";
 import { fetchProductDetails } from '../features/productDetailSlice';
 import Reviews from "./Reviews";
+import { Grid } from '@mui/material';
 
 function ProductDetail({ user, products }) {
   const params = useParams()
@@ -31,10 +32,21 @@ function ProductDetail({ user, products }) {
 
   return (
     <div>
-      <Product product={product} user={user} />
-      {productDetails.reviews ?
-      <Reviews userId={user.id} />
-      : null}
+      <Grid container direction="column" spacing={4} alignContent="center">
+        
+        <Grid item justifyContent="center" xd={6}>
+          <Product product={product} user={user} />
+        </Grid>
+        
+        <Grid item >
+          {productDetails.reviews 
+          ?
+          <Reviews userId={user.id} />
+          : null}
+        </Grid> 
+            
+        
+      </Grid>      
     </div>
   );
 }

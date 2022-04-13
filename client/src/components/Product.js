@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { cartAdded, cartUpdated } from '../features/cartSlice';
@@ -6,6 +6,7 @@ import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButt
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 function Product({ product, user }) {
+  const [isAddedToCart, setIsAddedToCart] = useState(false)
   const match = useRouteMatch()
   const dispatch = useDispatch()
   const { id, title, price, description, image, rating } = product
@@ -28,7 +29,13 @@ function Product({ product, user }) {
       })
       .then((r) => {
         if (r.ok) {
-          r.json().then((data) => dispatch(cartUpdated(data)))
+          r.json().then((data) => {
+            dispatch(cartUpdated(data))
+            setIsAddedToCart((isAddedToCart) => !isAddedToCart)
+            setTimeout(() => {
+              setIsAddedToCart((isAddedToCart) => !isAddedToCart)
+            }, 2000)
+          })
         } else {
           r.json().then((errors) => console.log(errors))
         }
@@ -50,7 +57,13 @@ function Product({ product, user }) {
       })
       .then((r) => {
         if (r.ok) {
-          r.json().then((data) => dispatch(cartAdded(data)))
+          r.json().then((data) => {
+            dispatch(cartAdded(data))
+            setIsAddedToCart((isAddedToCart) => !isAddedToCart)
+            setTimeout(() => {
+              setIsAddedToCart((isAddedToCart) => !isAddedToCart)
+            }, 2000)
+          })
         } else {
           r.json().then((errors) => console.log(errors))
         }
@@ -87,6 +100,10 @@ function Product({ product, user }) {
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly />
+            {isAddedToCart 
+            ?
+            <h3>The item has been added to cart.</h3>
+            : null} 
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -118,6 +135,10 @@ function Product({ product, user }) {
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly />
+            {isAddedToCart 
+            ?
+            <h3>The item has been added to cart.</h3>
+            : null}            
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

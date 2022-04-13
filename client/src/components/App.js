@@ -11,11 +11,11 @@ import Checkout from "./Checkout";
 import OrderHistory from "./OrderHistory";
 import { createTheme, Grid, Paper, ThemeProvider } from "@mui/material";
 import { useSelector } from "react-redux";
-import { green } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
-    primary: green,
+    primary: blue,
     // mode: "dark"
     }
 });
@@ -50,7 +50,7 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={theme} >
-        <Paper >
+        <Paper elevation={3}>
           <Grid container direction="column" spacing={4}>
             <Grid item >          
               <NavBar user={user} setProducts={setProducts} />                  

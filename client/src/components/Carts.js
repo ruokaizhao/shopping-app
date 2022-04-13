@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -15,19 +16,22 @@ function Cart() {
     <div>
       {total > 0 
       ?
-      <>      
+      <>     
+        <Link to="/checkout">
+          <Button variant="outlined" sx={{marginBottom: 10}}>
+            Checkout
+          </Button>
+        </Link>  
         <p>Total price: {total}</p>
+        
         {carts.map((productInCart) => {
           return (
             <ProductInCart key={productInCart.id} productInCart={productInCart} />
           )
         })}
-        <Link to="/checkout">
-          <button>Checkout</button>
-        </Link> 
       </> 
       :
-      <p>There is nothing in the cart.</p>}
+      <h3>There is nothing in the cart.</h3>}
          
     </div>
   );

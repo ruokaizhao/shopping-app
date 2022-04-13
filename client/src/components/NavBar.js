@@ -68,9 +68,17 @@ function NavBar({ user, setProducts }) {
                 </NavLink>
               </div> : 
               <div>
-                Hello, <strong>guest</strong>
-                <NavLink to="/login">Login</NavLink>
-                <NavLink to="/signup">Signup</NavLink><br/>
+                Hello, <strong>guest,</strong>
+                <NavLink to="/login">
+                  <Button color="secondary">
+                    Login
+                  </Button>
+                </NavLink>
+                <NavLink to="/signup">
+                  <Button color="secondary">
+                    Signup
+                  </Button>
+                </NavLink><br/>
               </div>}  
             </Grid>
 

@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 function OrderHistory({ user }) {
@@ -20,19 +21,24 @@ function OrderHistory({ user }) {
       {orders.length !== 0
       ?
       <div>
-        {orders.map((order) => {
-          return (
-            <div key={order.id}>
-              <p>{order.title}</p>
-              <p>{order.price}</p>
-              <p>{order.quantity}</p>
-              <img src={order.image} alt={order.title}/>
-            </div>
-          )
-        })}
-      </div>   
+        <Grid container spacing={8} >
+          {orders.map((order) => {
+            return (
+              <Grid item xs={12} sm={4} >
+                <div key={order.id}>
+                  <p>{order.title}</p>
+                  <p><strong>Price: ${order.price}</strong></p>
+                  <p><strong>Quantity: {order.quantity}</strong></p>
+                  <img src={order.image} alt={order.title}/>
+                </div>
+              </Grid>              
+            )
+          })}        
+        </Grid>
+      </div> 
+        
       :
-      <p>There is nothing here</p>}    
+      <h3>There is nothing here</h3>}    
     </div>
   )
 }
