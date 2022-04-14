@@ -12,7 +12,7 @@ function Checkout({ userId }) {
     state: "",
     zipcode: ""
   })
-  console.log(formData)
+  // console.log(formData)
   const [isEditing, setIsEditing] = useState(formData.fullname === "")
   const [isPlaced, setIsPlaced] = useState(true)  
   const carts = useSelector((state) => state.carts.entities)
@@ -29,7 +29,7 @@ function Checkout({ userId }) {
             if (address !== null) {
               setFormData(address)
               setIsEditing(false)
-              // Why does the below code log empty formData?
+              // Why does the below code log empty formData? Asychronous!!!
               console.log(formData)
             }          
           })

@@ -46,9 +46,7 @@ function SearchBar({ setProducts }) {
   return (
     <div>
       <form onSubmit={handleSearchSubmit}>
-        {/* <input type="text" id="searchbar" name="searchbar" value={search} onChange={handleSearchChange} />        
-        <button type="submit">Search</button> */}
-        <TextField variant="standard" color="secondary" fullWidth />
+        <TextField variant="standard" color="secondary" fullWidth value={search} onChange={handleSearchChange} />
       </form>
       
     </div>

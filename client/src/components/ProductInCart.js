@@ -83,21 +83,19 @@ function ProductInCart({ productInCart }) {
             alt={productInCart.title}
           />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="h6" color="text.secondary">
             <Rating name="half-rating-read" value={parseFloat(productInCart.rating)} precision={0.5} readOnly />
+            <p>Items: {productInCart.quantity}</p>
+            <p>Price: {productInCart.price * productInCart.quantity}</p>
           </Typography>
         </CardContent>
 
         <CardActions >
         {productInCart.quantity > 1 
-        ? <IconButton aria-label="add shopping cart" onClick={handleMinusCartClick} >
-            <RemoveIcon />
-          </IconButton> 
+        ? <Button variant="contained" onClick={handleMinusCartClick}>-</Button> 
         : <Button variant="contained" onClick={handleRemoveCartClick}>Remove from cart</Button>
         }
-          <IconButton aria-label="add shopping cart" onClick={handleAddCartClick} >
-            <AddIcon />
-          </IconButton>  
+          <Button variant="contained" onClick={handleAddCartClick}>+</Button>  
                 
         </CardActions>          
       </Card>

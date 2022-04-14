@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 function OrderHistory({ user }) {
@@ -14,7 +14,6 @@ function OrderHistory({ user }) {
       })
     }    
   }, [user.id])
-  console.log(orders)
 
   return (
     <div>
@@ -38,7 +37,9 @@ function OrderHistory({ user }) {
       </div> 
         
       :
-      <h3>There is nothing here</h3>}    
+      <Typography variant="h4" sx={{mb:4}}>
+        There is nothing here.
+      </Typography>}  
     </div>
   )
 }

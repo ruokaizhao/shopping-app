@@ -5,7 +5,6 @@ import { fetchCarts } from '../features/cartSlice';
 import SearchBar from './SearchBar';
 import { Button, Grid, Typography } from '@mui/material';
 import { AppBar, Toolbar } from "@mui/material";
-import Search from "./Search";
 
 function NavBar({ user, setProducts }) {
   const carts = useSelector((state) => state.carts.entities)
@@ -31,7 +30,7 @@ function NavBar({ user, setProducts }) {
 
             <Grid item >
               <NavLink to="/">
-                <Typography>
+                <Typography >
                   Home
                 </Typography>             
               </NavLink>
@@ -68,7 +67,7 @@ function NavBar({ user, setProducts }) {
                 </NavLink>
               </div> : 
               <div>
-                Hello, <strong>guest,</strong>
+                Hello, <strong>guest</strong>
                 <NavLink to="/login">
                   <Button color="secondary">
                     Login
