@@ -12,7 +12,7 @@ class Api::ProductsController < ApplicationController
 
   def search
     search = params[:search].downcase
-    products = Product.all.where("lower(title) LIKE :search", search: "%#{search}%")
+    products = Product.search_items(search)
     render json: products, status: :ok
   end
 

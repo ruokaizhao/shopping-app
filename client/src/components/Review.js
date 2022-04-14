@@ -1,9 +1,9 @@
-import { Rating } from '@mui/material';
+import { Box, Rating } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { reviewRemoved, reviewUpdated } from '../features/productDetailSlice';
 
-function Review({ review, userId }) {
+function Review({ review, userId, isEditingReview, setIsEditingReview }) {
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
     rating: review.rating,
@@ -14,6 +14,7 @@ function Review({ review, userId }) {
 
   function handleEditClick() {
     setIsEditing((isEditing) => !isEditing)
+    setIsEditingReview((isEditingReview) => !isEditingReview)
   }
 
   function handleChange(e) {
@@ -36,6 +37,7 @@ function Review({ review, userId }) {
       if (r.ok) {
         r.json().then((reviewReturned) => dispatch(reviewUpdated(reviewReturned)))
         setIsEditing((isEditing) => !isEditing)
+        setIsEditingReview((isEditingReview) => !isEditingReview)
       }
     })
   }
@@ -52,10 +54,16 @@ function Review({ review, userId }) {
   }
 
   return (
-    <div>
-      <p>{review.name}</p>
-      <p>{review.updated_at}</p>
-      <p>{review.rating}</p>
+    <Box
+    sx={{
+      mt: 4,
+      mb: 4,
+      border: '1px outset',
+      padding: 1
+    }}>
+      <span>{review.name}</span>
+      <span>{review.updated_at}</span>
+      <Rating name="half-rating-read" value={parseFloat(review.rating)} precision={0.5} readOnly />
       <p>{review.content}</p>
       {currentUser ? 
       <div>
@@ -76,8 +84,8 @@ function Review({ review, userId }) {
         
         <button type="submit">Submit your review</button>
       </form>
-      : null}     
-    </div>
+      : null} 
+    </Box>
   );
 }
 

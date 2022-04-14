@@ -34,11 +34,11 @@ function ProductDetail({ user, products }) {
     <div>
       <Grid container direction="column" spacing={4} alignContent="center">
         
-        <Grid item justifyContent="center" xd={6}>
+        <Grid item justifyContent="center" >
           <Product product={product} user={user} />
         </Grid>
         
-        <Grid item >
+        <Grid item sx={{mb:4}} >
           {productDetails.reviews 
           ?
           <Reviews userId={user.id} />

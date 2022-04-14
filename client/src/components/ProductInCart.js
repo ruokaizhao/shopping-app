@@ -2,9 +2,7 @@ import { Button } from '@mui/material';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { cartRemoved, cartUpdated } from '../features/cartSlice';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Rating, CardActionArea } from '@mui/material';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, Typography, Rating } from '@mui/material';
 
 function ProductInCart({ productInCart }) {
   const dispatch = useDispatch()
