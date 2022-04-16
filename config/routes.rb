@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :carts, only: [:create, :destroy, :update]
     resources :reviews, only: [:create, :update, :destroy]
     resources :orders, only: [:create]
-    resources :addresses, only: [:create]
+    resources :addresses, only: [:create, :update]
 
     get "/search/:search", to: "products#search"
     # The "" and " " search will hit "/search" route.

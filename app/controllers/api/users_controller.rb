@@ -19,7 +19,7 @@ class Api::UsersController < ApplicationController
     params.permit(:username, :password, :password_confirmation, :name, :email)
   end
 
-  def render_unprocessable_entity_response
+  def render_unprocessable_entity_response(invalid)
     render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
 

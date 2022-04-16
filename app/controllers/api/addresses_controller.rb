@@ -11,6 +11,12 @@ class Api::AddressesController < ApplicationController
     render json: address, status: :created
   end
 
+  def update
+    address = Address.find(params[:id])
+    address.update!(address_params)
+    render json: address, status: :ok
+  end
+
   private
 
   def address_params

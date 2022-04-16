@@ -12,7 +12,7 @@ function Checkout({ userId }) {
     state: "",
     zipcode: ""
   })
-  // console.log(formData)
+
   const [isEditing, setIsEditing] = useState(formData.fullname === "")
   const [isPlaced, setIsPlaced] = useState(true)  
   const carts = useSelector((state) => state.carts.entities)
@@ -29,8 +29,6 @@ function Checkout({ userId }) {
             if (address !== null) {
               setFormData(address)
               setIsEditing(false)
-              // Why does the below code log empty formData? Asychronous!!!
-              console.log(formData)
             }          
           })
         } else {
@@ -50,12 +48,32 @@ function Checkout({ userId }) {
 
   function handleCheckoutSubmit(e) {
     e.preventDefault()
-    postAddress()    
-    carts.forEach((cart) => {
+    if (formData.id === "") {
+      postAddress()    
+      carts.forEach((cart) => {
       const {id, ...cartNoId} = cart
       postOrder(cartNoId)
       deleteCart(cart.id)
       setIsPlaced((isPlaced) => !isPlaced)
+      })
+    } else {
+      updateAddress(formData.id)    
+      carts.forEach((cart) => {
+      const {id, ...cartNoId} = cart
+      postOrder(cartNoId)
+      deleteCart(cart.id)
+      setIsPlaced((isPlaced) => !isPlaced)
+      })
+    }    
+  }
+
+  function handleCheckoutSubmitNoAddressChange(e) {
+    e.preventDefault()    
+    carts.forEach((cart) => {
+    const {id, ...cartNoId} = cart
+    postOrder(cartNoId)
+    deleteCart(cart.id)
+    setIsPlaced((isPlaced) => !isPlaced)
     })
   }
 
@@ -68,6 +86,16 @@ function Checkout({ userId }) {
       body: JSON.stringify({
         ...formData, user_id: userId
       })
+    })
+  }
+
+  function updateAddress(addressId) {
+    fetch(`/api/addresses/${addressId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({...formData, user_id: userId})
     })
   }
 
@@ -117,7 +145,7 @@ function Checkout({ userId }) {
           <p>City: {formData.city}</p>
           <p>State: {formData.state}</p>
           <p>Zip code: {formData.zipcode}</p>
-          <button onClick={handleCheckoutSubmit}>Place your order</button>      
+          <button onClick={handleCheckoutSubmitNoAddressChange}>Place your order</button>      
           <button onClick={handleEditAddressClick}>Edit address</button> 
         </div>}  
       </div>

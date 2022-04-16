@@ -150,7 +150,7 @@ function Signup({ onLogin }) {
                   fullWidth
                   name="password2"
                   label="Comfirm password"
-                  type="password2"
+                  type="password"
                   id="password2"
                   autoComplete="confirm-password"
                   value={formData.password2}

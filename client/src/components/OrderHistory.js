@@ -23,8 +23,8 @@ function OrderHistory({ user }) {
         <Grid container spacing={8} >
           {orders.map((order) => {
             return (
-              <Grid item xs={12} sm={4} >
-                <div key={order.id}>
+              <Grid key={order.id} item xs={12} sm={4} >
+                <div >
                   <p>{order.title}</p>
                   <p><strong>Price: ${order.price}</strong></p>
                   <p><strong>Quantity: {order.quantity}</strong></p>

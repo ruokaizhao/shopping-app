@@ -99,10 +99,10 @@ function Product({ product, user }) {
         </CardActionArea>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly />
+            <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly /><br/>
             {isAddedToCart 
             ?
-            <h3>The item has been added to cart.</h3>
+            <strong>The item has been added to cart.</strong>
             : null} 
           </Typography>
         </CardContent>
@@ -134,10 +134,10 @@ function Product({ product, user }) {
           />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly />
+            <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly /><br/>
             {isAddedToCart 
             ?
-            <h3>The item has been added to cart.</h3>
+            <strong>The item has been added to cart.</strong>
             : null}            
           </Typography>
         </CardContent>
