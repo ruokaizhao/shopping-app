@@ -19,6 +19,7 @@ function Signup({ onLogin }) {
     name: "",
     email: ""
   })
+  const [errors, setErrors] = useState([])
 
   const history = useHistory()
 
@@ -53,29 +54,16 @@ function Signup({ onLogin }) {
             name: "",
             email: "" 
           })
+          setErrors([])
         })
       } else {
-        r.json().then((errors) => console.log(errors))
+        r.json().then((err) => setErrors([...err.errors]))
       }
     })
   }
 
   return (
     <div>
-      {/* <form onSubmit={handleFormSubmit}>
-        <label htmlFor="username">Please enter your username:</label><br/>
-        <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} /><br/>
-        <label htmlFor="password">Please enter your password:</label><br/>
-        <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} /><br/>
-        <label htmlFor="password2">Please confirm your password:</label><br/>
-        <input type="password" id="password2" name="password2" value={formData.password2} onChange={handleChange} /><br/>
-        <label htmlFor="name">Please enter your name:</label><br/>
-        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} /><br/>
-        <label htmlFor="email">please enter your email:</label><br/>
-        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} /><br/>
-        <button type="submit">Submit</button>
-      </form>   */}
-
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -92,7 +80,7 @@ function Signup({ onLogin }) {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleFormSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleFormSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -144,7 +132,7 @@ function Signup({ onLogin }) {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sx={{mb: 2}}>
                 <TextField
                   required
                   fullWidth
@@ -158,6 +146,14 @@ function Signup({ onLogin }) {
                 />
               </Grid>
             </Grid>
+            {errors.length !== 0 
+            ?
+            errors.map((error) => {
+              return (
+                <Typography color="red" key={error}>{error}</Typography>
+              )              
+            })
+            : null}
             <Button
               type="submit"
               fullWidth

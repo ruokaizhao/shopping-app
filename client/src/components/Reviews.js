@@ -11,6 +11,7 @@ function Reviews({ userId }) {
     rating: "",
     content: ""
   })
+  const [errors, setErrors] = useState([])
   const dispatch = useDispatch()
   const productDetails = useSelector((state) => state.productDetails.entities)
 
@@ -34,12 +35,17 @@ function Reviews({ userId }) {
     })
     .then((r) => {
       if (r.ok) {
-        r.json().then((review) => dispatch(reviewAdded(review)))
-      }
-      setFormData({
-        rating: "",
-        content: ""
-      })
+        r.json().then((review) => {
+          dispatch(reviewAdded(review))
+          setFormData({
+            rating: "",
+            content: ""
+          })
+          setErrors([])
+        })
+      } else {
+        r.json().then((err) => setErrors([...err.errors]))
+      }      
     })
   }
 
@@ -60,7 +66,7 @@ function Reviews({ userId }) {
         ?
         <>
           <TextField 
-            sx={{width: 600, mt: 3}} 
+            sx={{width: 600, mt: 3, mb: 2}} 
             id="review_content" 
             name="content" 
             autoFocus
@@ -69,6 +75,14 @@ function Reviews({ userId }) {
             variant="outlined"
             label="Enter your review..."
             multiline/><br/>
+          {errors.length !== 0 
+          ?
+          errors.map((error) => {
+            return (
+              <Typography color="red">{error}</Typography>
+            )
+          })
+          : null}
           <Grid container>
             <Grid item sx={{mt: 2, flexGrow: 1}}>
               <Rating
@@ -76,7 +90,7 @@ function Reviews({ userId }) {
               value={parseInt(formData.rating)}
               onChange={(handleChange)}
               />  
-            </Grid>
+            </Grid>            
             <Grid item sx={{mt: 2}}>
               <Button variant="outlined" type="submit" onClick={handleReviewSubmit}>Submit your review</Button>
             </Grid>

@@ -36,7 +36,7 @@ class Api::CartsController < ApplicationController
   end
 
   def render_not_found_response(exception)
-    render json: { errors: "#{exception.model} not found" }, status: :not_found
+    render json: { errors: ["#{exception.model} not found"] }, status: :not_found
   end
 
 end

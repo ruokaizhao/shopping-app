@@ -16,6 +16,7 @@ function Login({ onLogin }) {
     username: "",
     password: ""
   })
+  const [errors, setErrors] = useState([])
   const history = useHistory()
 
   function handleChange(e) {
@@ -43,9 +44,10 @@ function Login({ onLogin }) {
             username: "",
             password: ""
           })
+          setErrors([])
         })
       } else {
-        r.json().then((errors) => console.log(errors))
+        r.json().then((err) => setErrors([...err.errors]))
       }
     })
   }
@@ -53,14 +55,6 @@ function Login({ onLogin }) {
 
   return (
     <div>
-      {/* <form onSubmit={handleLoginSubmit}>
-        <label htmlFor="username">Please enter your username:</label><br/>
-        <input type="text" id="username" name="username" value={formData.username} onChange={handleChange}/><br/>
-        <label htmlFor="password">Please enter your password:</label><br/>
-        <input type="password" id="password" name="password" value={formData.password} onChange={handleChange}/><br/>
-        <button type="submit">Submit</button>
-      </form> */}
-
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -77,20 +71,21 @@ function Login({ onLogin }) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleLoginSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleLoginSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
+              id="username"
+              label="Username"
               name="username"
-              autoComplete="email"
+              autoComplete="username"
               autoFocus
               value={formData.username}
               onChange={handleChange}
             />
             <TextField
+              sx={{mb: 2}}
               margin="normal"
               required
               fullWidth
@@ -102,6 +97,14 @@ function Login({ onLogin }) {
               value={formData.password}
               onChange={handleChange}
             />
+            {errors.length !== 0 
+            ?
+            errors.map((error) => {
+              return (
+                <Typography color="red" key={error}>{error}</Typography>
+              )
+            })
+            : null}
             <Button
               type="submit"
               fullWidth

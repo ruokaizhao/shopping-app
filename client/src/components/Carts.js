@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ function Cart() {
 
 
   return (
-    <div>
+    <Box sx={{ml: 5}}>
       {totalPrice > 0 
       ?
       <>     
@@ -37,7 +37,7 @@ function Cart() {
         There is nothing in the cart.
       </Typography>}
          
-    </div>
+      </Box>
   );
 }
 

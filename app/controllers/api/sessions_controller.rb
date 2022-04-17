@@ -7,7 +7,7 @@ class Api::SessionsController < ApplicationController
       session[:user_id] = user.id
       render json: user, status: :created
     else
-      render json: { errors: "Invalid username or password" }, status: :unauthorized
+      render json: { errors: ["Invalid username or password"] }, status: :unauthorized
     end
   end
 
@@ -17,7 +17,7 @@ class Api::SessionsController < ApplicationController
   end
 
   def authorize
-    return render json: { errors: "Not authorized" }, status: :unauthorized unless session.include? :user_id
+    return render json: { errors: ["Not authorized"] }, status: :unauthorized unless session.include? :user_id
   end
 
 end
