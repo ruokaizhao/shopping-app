@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Review from "./Review";
 import { reviewAdded } from "../features/productDetailSlice";
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Rating, TextField, Typography } from '@mui/material';
+import { Button, Container, Grid, Rating, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 function Reviews({ userId }) {
@@ -44,7 +44,7 @@ function Reviews({ userId }) {
   }
 
   return (
-      <Box >
+      <Box>
         <Typography variant="h4" >
           Reviews
         </Typography>
@@ -53,22 +53,35 @@ function Reviews({ userId }) {
             <Review key={review.id} review={review} userId={userId} setIsEditingReview={setIsEditingReview} />
           )
         })}
-        {!isEditingReview
+        <Button sx={{mt: 3}} onClick={() => setIsEditingReview((isEditingReview) => !isEditingReview)}>
+          {isEditingReview ? "Cancel" : "Start a new review?"}
+        </Button><br/>
+        {isEditingReview
         ?
-        <form onSubmit={handleReviewSubmit}> 
-          <Rating
+        <>
+          <TextField 
+            sx={{width: 600, mt: 3}} 
+            id="review_content" 
+            name="content" 
+            value={formData.content} 
+            onChange={handleChange} 
+            variant="outlined"
+            placeholder="Enter your review..."
+            multiline/><br/>
+          <Grid container>
+            <Grid item sx={{mt: 2, flexGrow: 1}}>
+              <Rating
               name="rating"
               value={parseInt(formData.rating)}
               onChange={(handleChange)}
-          />
-          <br/>
-          <label htmlFor="review_content">Enter your review:</label><br/>
-          <TextField id="review_content" name="content" value={formData.content} onChange={handleChange}/><br/>
-          
-          <button type="submit">Submit your review</button>
-        </form>
-        :
-        null}        
+              />  
+            </Grid>
+            <Grid item sx={{mt: 2}}>
+              <Button variant="outlined" type="submit" onClick={handleReviewSubmit}>Submit your review</Button>
+            </Grid>
+          </Grid>          
+        </>          
+        :null}        
       </Box>
   );
 }

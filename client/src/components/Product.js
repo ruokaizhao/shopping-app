@@ -75,7 +75,7 @@ function Product({ product, user }) {
     <div>
       {match.url === "/" 
       ?
-      <Card sx={{ maxWidth: 500, height: 600 }} variant="outlined">
+      <Card sx={{ height: 600 }} variant="outlined">
         <CardActionArea >        
           <Link to={`products/${id}`}>
             <CardHeader
@@ -114,7 +114,7 @@ function Product({ product, user }) {
       </Card>
       : 
       <div>
-        <Card sx={{ maxWidth: 500, height: 600 }}>
+        <Card sx={{ width: 600, height: 600 }}>
           <CardHeader
             avatar={
               <Avatar aria-label="recipe">
