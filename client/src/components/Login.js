@@ -115,7 +115,7 @@ function Login({ onLogin }) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item sx={{mb: 4}}>
-                <Link href="/Signup" variant="body2">
+                <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

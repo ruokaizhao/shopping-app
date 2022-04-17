@@ -11,6 +11,7 @@ function Product({ product, user }) {
   const dispatch = useDispatch()
   const { id, title, price, description, description_short: descriptionShort, image, rating } = product
   const carts = useSelector((state) => state.carts.entities)
+  const [errors, setErrors] = useState([])
 
   function handleCartClick() {
     const productTitlesInCarts = carts.map((item) => item.title)
@@ -37,7 +38,7 @@ function Product({ product, user }) {
             }, 2000)
           })
         } else {
-          r.json().then((errors) => console.log(errors))
+          r.json().then((err) => setErrors([...err.errors]))
         }
       })
     } else {
@@ -65,7 +66,7 @@ function Product({ product, user }) {
             }, 2000)
           })
         } else {
-          r.json().then((errors) => console.log(errors))
+          r.json().then((err) => setErrors([...err.errors]))
         }
       })
     }    
@@ -100,13 +101,21 @@ function Product({ product, user }) {
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly /><br/>
-            {isAddedToCart 
-            ?
-            <Typography color="secondary" sx={{mt: 1}}>The item has been added to cart.</Typography>
-            : null} 
           </Typography>
           <Typography sx={{mt: 2}} variant="h6">About this item:</Typography>
           <Typography paragraph>{descriptionShort}</Typography>
+          {isAddedToCart 
+            ?
+            <Typography color="secondary" sx={{mt: 1}}>The item has been added to cart.</Typography>
+            : null}
+            {errors.length !== 0 
+            ?
+            errors.map((error) => {
+              return (
+                <Typography color="red" sx={{mt: 1}}>{error}</Typography>
+              )
+            })            
+            : null} 
         </CardContent>
         <CardActions disableSpacing>
           <Button variant="contained" startIcon={<AddShoppingCartIcon />} onClick={handleCartClick}>Add to cart</Button>       
@@ -134,14 +143,22 @@ function Product({ product, user }) {
           />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly /><br/>
-            {isAddedToCart 
-            ?
-            <Typography color="secondary" sx={{mt: 1}}>The item has been added to cart.</Typography>
-            : null}            
+            <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly /><br/>         
           </Typography>
           <Typography sx={{mt: 2}} variant="h6">About this item:</Typography>
           <Typography paragraph>{description}</Typography>
+          {isAddedToCart 
+            ?
+            <Typography color="secondary" sx={{mt: 1}}>The item has been added to cart.</Typography>
+            : null}
+            {errors.length !== 0 
+            ?
+            errors.map((error) => {
+              return (
+                <Typography color="red" sx={{mt: 1}}>{error}</Typography>
+              )
+            })            
+            : null}
         </CardContent>
         <CardActions disableSpacing>       
           <Button variant="contained" startIcon={<AddShoppingCartIcon />} onClick={handleCartClick}>Add to cart</Button>
