@@ -36,7 +36,7 @@ function OrderHistory({ user }) {
                       subheader={
                         <>
                           <strong>Price: ${order.price}</strong><br/>
-                          <strong>Quantity: ${order.quantity}</strong>
+                          <strong>Quantity: {order.quantity}</strong>
                         </>                          
                       }
                     />
