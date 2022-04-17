@@ -1,4 +1,4 @@
-import { Box, Rating } from '@mui/material';
+import { Grid, Rating, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { reviewRemoved, reviewUpdated } from '../features/productDetailSlice';
@@ -8,7 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-function Review({ review, userId, isEditingReview, setIsEditingReview }) {
+function Review({ review, userId }) {
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
     rating: review.rating,
@@ -21,7 +21,6 @@ function Review({ review, userId, isEditingReview, setIsEditingReview }) {
 
   function handleEditClick() {
     setIsEditing((isEditing) => !isEditing)
-    setIsEditingReview((isEditingReview) => !isEditingReview)
   }
 
   function handleChange(e) {
@@ -44,7 +43,6 @@ function Review({ review, userId, isEditingReview, setIsEditingReview }) {
       if (r.ok) {
         r.json().then((reviewReturned) => dispatch(reviewUpdated(reviewReturned)))
         setIsEditing((isEditing) => !isEditing)
-        setIsEditingReview((isEditingReview) => !isEditingReview)
       }
     })
   }
@@ -61,42 +59,58 @@ function Review({ review, userId, isEditingReview, setIsEditingReview }) {
   }
 
   return (
-    <Card sx={{ width: 600 }} variant="outlined">
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {review.name}         
-        </Typography>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>      
-          <Rating name="half-rating-read" size="small" value={parseFloat(review.rating)} precision={0.5} readOnly />
-        </Typography>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>      
-          {timestamp}
-        </Typography>        
-        <Typography sx={{overflowWrap: "break-word"}}>
-          {review.content}          
-        </Typography>      
-      </CardContent>
-      <CardActions>
-        {currentUser ? 
-        <div>
-          <Button onClick={handleEditClick}>Edit</Button>
-          <Button onClick={handleDeleteClick}>Delete</Button>
-        </div>
-        : null}
-        {isEditing ? 
-        <form onSubmit={handleReviewSubmit}> 
-          <Rating
+    <>    
+      <Card sx={{ width: 600 }} variant="outlined">
+        <CardContent>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            {review.name}         
+          </Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>      
+            <Rating name="half-rating-read" size="small" value={parseFloat(review.rating)} precision={0.5} readOnly />
+          </Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>      
+            {timestamp}
+          </Typography>        
+          <Typography sx={{overflowWrap: "break-word"}}>
+            {review.content}          
+          </Typography>      
+        </CardContent>
+        <CardActions>
+          {currentUser ? 
+          <div>
+            <Button onClick={handleEditClick}>Edit</Button>
+            <Button onClick={handleDeleteClick}>Delete</Button>
+          </div>
+          : null}
+        </CardActions>
+      </Card>
+      {isEditing ? 
+      <>
+        <TextField
+        sx={{width: 600, mt: 3}} 
+        id="review_content" 
+        name="content" 
+        autoFocus
+        value={formData.content} 
+        onChange={handleChange} 
+        variant="outlined"
+        label="Enter your review..."
+        multiline/>
+        <Grid container>
+          <Grid item sx={{mt: 2, flexGrow: 1}}>
+            <Rating
             name="rating"
-            defaultValue={parseInt(formData.rating)}
-            onChange={handleChange}
-          />
-          <label htmlFor="review_content">Enter your review:</label><br/>
-          <textarea id="review_content" name="content" defaultValue={formData.content} onChange={handleChange}/><br/>          
-          <button type="submit">Submit your review</button>
-        </form>
-        : null}        
-      </CardActions>
-    </Card>
+            value={parseInt(formData.rating)}
+            onChange={(handleChange)}
+            />  
+          </Grid>
+          <Grid item sx={{mt: 2}}>
+            <Button variant="outlined" type="submit" onClick={handleReviewSubmit}>Submit your review</Button>
+          </Grid>
+        </Grid>   
+      </>            
+      : null}   
+      </>     
   );
 }
 

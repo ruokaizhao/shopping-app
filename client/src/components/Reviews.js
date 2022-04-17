@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Review from "./Review";
 import { reviewAdded } from "../features/productDetailSlice";
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Container, Grid, Rating, TextField, Typography } from '@mui/material';
+import { Button, Grid, Rating, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 function Reviews({ userId }) {
@@ -63,10 +63,11 @@ function Reviews({ userId }) {
             sx={{width: 600, mt: 3}} 
             id="review_content" 
             name="content" 
+            autoFocus
             value={formData.content} 
             onChange={handleChange} 
             variant="outlined"
-            placeholder="Enter your review..."
+            label="Enter your review..."
             multiline/><br/>
           <Grid container>
             <Grid item sx={{mt: 2, flexGrow: 1}}>

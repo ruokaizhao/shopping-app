@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Rating, CardActionArea, Grid } from '@mui/material';
+import { Card, CardHeader, CardMedia, Avatar, Typography, Grid } from '@mui/material';
 
 function OrderHistory({ user }) {
   const [orders, setOrders] = useState([])
