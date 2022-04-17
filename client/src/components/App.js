@@ -39,8 +39,6 @@ function App() {
     .then((r) => {
       if (r.ok) {
         r.json().then((products) => setProducts(products))
-      } else {
-        r.json().then((errors) => console.log(errors))
       }
     })
   }, [user, productDetails])
