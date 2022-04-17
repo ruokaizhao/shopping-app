@@ -19,12 +19,12 @@ function Cart() {
       ?
       <>     
         <Link to="/checkout">
-          <Button variant="contained" color="secondary" sx={{marginBottom: 10}}>
+          <Button variant="contained" color="secondary" sx={{marginBottom: 4}}>
             Checkout
           </Button>
-        </Link>  
-        <h1>Total items: {totalItems}</h1>
-        <h1>Total price: ${totalPrice}</h1>
+        </Link> 
+        <Typography variant="h4">Total items: {totalItems}</Typography> 
+        <Typography sx={{mb: 2}} variant="h4">Total price: ${totalPrice}</Typography> 
         
         {carts.map((productInCart) => {
           return (
