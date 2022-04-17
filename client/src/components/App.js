@@ -24,6 +24,7 @@ function App() {
   const [user, setUser] = useState({})
   const [products, setProducts] = useState([])
   const productDetails = useSelector((state) => state.productDetails.entities)
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     fetch("/api/me")
@@ -35,13 +36,13 @@ function App() {
   }, [])
 
   useEffect(() => {
-    fetch("/api/products")
+    fetch(`/api/search/${search}`)
     .then((r) => {
       if (r.ok) {
         r.json().then((products) => setProducts(products))
       }
     })
-  }, [user, productDetails])
+  }, [user, productDetails, search])
 
   return (
     <div>
@@ -49,7 +50,7 @@ function App() {
         <Paper elevation={3}>
           <Grid container direction="column" spacing={4}>
             <Grid item >          
-              <NavBar user={user} setProducts={setProducts} />                  
+              <NavBar user={user} setProducts={setProducts} search={search} setSearch={setSearch} />                  
             </Grid>
             <Grid item>
               <Switch>

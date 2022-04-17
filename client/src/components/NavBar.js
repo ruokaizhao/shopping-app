@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import { Button, Grid, Typography } from '@mui/material';
 import { AppBar, Toolbar } from "@mui/material";
 
-function NavBar({ user, setProducts }) {
+function NavBar({ user, setProducts, search, setSearch }) {
   const carts = useSelector((state) => state.carts.entities)
   const itemsInCarts = carts.reduce((previous, current) => previous + current.quantity, 0)
   const dispatch = useDispatch()
@@ -22,6 +22,10 @@ function NavBar({ user, setProducts }) {
     }    
   }, [user.id])
 
+  function handleHomeClick() {
+    setSearch("")
+  }
+
   return (
     <div>
       <AppBar position="static" >
@@ -29,7 +33,7 @@ function NavBar({ user, setProducts }) {
           <Grid container>
 
             <Grid item >
-              <NavLink to="/">
+              <NavLink to="/" onClick={handleHomeClick}>
                 <Typography >
                   Home
                 </Typography>             
@@ -37,7 +41,7 @@ function NavBar({ user, setProducts }) {
             </Grid>
             
             <Grid item sx={{flexGrow: 1, marginLeft: 2, marginRight: 2}} >
-              <SearchBar setProducts={setProducts} />
+              <SearchBar setProducts={setProducts} search={search} setSearch={setSearch} />
             </Grid>
 
             <Grid item sx={{marginRight: 2}} >

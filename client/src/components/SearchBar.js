@@ -1,8 +1,8 @@
 import { TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 
-function SearchBar({ setProducts }) {
-  const [search, setSearch] = useState("")
+function SearchBar({ setProducts, search, setSearch }) {
+  
 
   function handleSearchChange(e) {
     setSearch(e.target.value)
@@ -13,9 +13,9 @@ function SearchBar({ setProducts }) {
     fetch(`/api/search/${search}`)
     .then((r) => {
       if(r.ok) {
-        r.json().then((products) => setProducts(products))
-      } else {
-        r.json().then((errors) => console.log(errors))
+        r.json().then((products) => {
+          setProducts(products)
+        })
       }
     })
     // If there is only get "/search/:search" route, no get "/search" route in the backend, we need the following code to separate search of

@@ -153,11 +153,13 @@ function Checkout({ userId }) {
               </Grid>
               {errors.length !== 0 
               ?
-              errors.map((error) => {
+              <Grid container direction="column">
+              {errors.map((error) => {
                 return (                  
-                    <Typography sx={{ml: 4}} key={error} color="red">{error}</Typography>                
+                  <Typography sx={{ml: 4, mt: 3}} key={error} color="red">{error}</Typography>                                                    
                 )
-              })
+              })}
+              </Grid>
               : null}      
               <Button fullWidth sx={{ml: 4, mt: 3, mb: 2}} type="submit" variant="contained">Place your order</Button>
             </Grid>
