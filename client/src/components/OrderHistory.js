@@ -19,9 +19,9 @@ function OrderHistory({ user }) {
     <div>
       {orders.length !== 0
       ?
-      <Grid container>
+      <Grid container sx={{mb: 10}}>
         <Grid item xs={0} sm={1} />
-        <Grid item container xs={12} sm={10} spacing={4}>        
+        <Grid item container xs={12} sm={10} spacing={12}>        
           {orders.map((order) => {
             return (
               <Grid key={order.id} item xs={12} sm={4} >

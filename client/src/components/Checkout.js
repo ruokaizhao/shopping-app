@@ -72,9 +72,9 @@ function Checkout({ userId }) {
           carts.forEach((cart) => {
             const {id, ...cartNoId} = cart
             postOrder(cartNoId)
-            deleteCart(cart.id)
-            setIsPlaced((isPlaced) => !isPlaced)
+            deleteCart(cart.id)            
             })
+          setIsPlaced((isPlaced) => !isPlaced)
           setErrors([])
         } else {
           r.json().then((err) => setErrors([...err.errors]))
@@ -93,9 +93,9 @@ function Checkout({ userId }) {
           carts.forEach((cart) => {
             const {id, ...cartNoId} = cart
             postOrder(cartNoId)
-            deleteCart(cart.id)
-            setIsPlaced((isPlaced) => !isPlaced)
+            deleteCart(cart.id)            
             })
+          setIsPlaced((isPlaced) => !isPlaced)
           setErrors([])
         } else {
           r.json().then((err) => setErrors([...err.errors]))

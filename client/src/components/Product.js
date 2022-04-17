@@ -9,7 +9,7 @@ function Product({ product, user }) {
   const [isAddedToCart, setIsAddedToCart] = useState(false)
   const match = useRouteMatch()
   const dispatch = useDispatch()
-  const { id, title, price, description, image, rating } = product
+  const { id, title, price, description, description_short: descriptionShort, image, rating } = product
   const carts = useSelector((state) => state.carts.entities)
 
   function handleCartClick() {
@@ -75,7 +75,7 @@ function Product({ product, user }) {
     <div>
       {match.url === "/" 
       ?
-      <Card sx={{ height: 600 }} variant="outlined">
+      <Card sx={{ height: 650 }} variant="outlined">
         <CardActionArea >        
           <Link to={`products/${id}`}>
             <CardHeader
@@ -102,9 +102,11 @@ function Product({ product, user }) {
             <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly /><br/>
             {isAddedToCart 
             ?
-            <strong>The item has been added to cart.</strong>
+            <Typography sx={{mt: 1}}>The item has been added to cart.</Typography>
             : null} 
           </Typography>
+          <Typography color="secondary" sx={{mt: 2}} variant="h6">About this item:</Typography>
+          <Typography paragraph>{descriptionShort}</Typography>
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add shopping cart" onClick={handleCartClick} >
@@ -114,7 +116,7 @@ function Product({ product, user }) {
       </Card>
       : 
       <div>
-        <Card sx={{ width: 600, height: 600 }}>
+        <Card sx={{ width: 600}}>
           <CardHeader
             avatar={
               <Avatar aria-label="recipe">
@@ -137,9 +139,11 @@ function Product({ product, user }) {
             <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly /><br/>
             {isAddedToCart 
             ?
-            <strong>The item has been added to cart.</strong>
+            <Typography color="secondary" sx={{mt: 1}}>The item has been added to cart.</Typography>
             : null}            
           </Typography>
+          <Typography sx={{mt: 2}} variant="h6">About this item:</Typography>
+          <Typography paragraph>{description}</Typography>
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add shopping cart" onClick={handleCartClick} >
