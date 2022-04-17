@@ -34,25 +34,25 @@ function NavBar({ user, setProducts, search, setSearch }) {
 
             <Grid item >
               <NavLink to="/" onClick={handleHomeClick}>
-                <Typography >
+                <Button color="secondary">
                   Home
-                </Typography>             
+                </Button>             
               </NavLink>
             </Grid>
             
-            <Grid item sx={{flexGrow: 1, marginLeft: 2, marginRight: 2}} >
+            <Grid justifyContent="flex-start" sx={{ display: { xs: "none", md: "flex" }, flexGrow: 1, ml: 3 }} >
               <SearchBar setProducts={setProducts} search={search} setSearch={setSearch} />
             </Grid>
 
-            <Grid item sx={{marginRight: 2}} >
+            <Grid item sx={{marginRight: 1}} >
               <NavLink to="/orders">
                 <Button color="secondary">
-                  Purchase History
+                  Order History
                 </Button>
               </NavLink> 
             </Grid>
 
-            <Grid item sx={{marginRight: 2}} >
+            <Grid item sx={{marginRight: 1}} >
               <NavLink to="/carts">
                 <Button color="secondary">
                   Cart: {itemsInCarts}
@@ -88,7 +88,6 @@ function NavBar({ user, setProducts, search, setSearch }) {
           </Grid> 
         </Toolbar>
       </AppBar>
-      {/* <Search /> */}
     </div>
   );
 }

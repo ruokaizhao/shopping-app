@@ -60,7 +60,7 @@ function Review({ review, userId }) {
 
   return (
     <>    
-      <Card sx={{ width: 600 }} variant="outlined">
+      <Card sx={{ width: 500 }} variant="outlined">
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             {review.name}         
@@ -87,7 +87,7 @@ function Review({ review, userId }) {
       {isEditing ? 
       <>
         <TextField
-        sx={{width: 600, mt: 3}} 
+        sx={{width: 500, mt: 3}} 
         id="review_content" 
         name="content" 
         autoFocus
@@ -95,7 +95,8 @@ function Review({ review, userId }) {
         onChange={handleChange} 
         variant="outlined"
         label="Enter your review..."
-        multiline/>
+        multiline
+        rows={5} />
         <Grid container>
           <Grid item sx={{mt: 2, flexGrow: 1}}>
             <Rating

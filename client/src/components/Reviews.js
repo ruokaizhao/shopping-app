@@ -66,7 +66,7 @@ function Reviews({ userId }) {
         ?
         <>
           <TextField 
-            sx={{width: 600, mt: 3, mb: 2}} 
+            sx={{width: 500, mt: 3, mb: 2}} 
             id="review_content" 
             name="content" 
             autoFocus
@@ -74,7 +74,8 @@ function Reviews({ userId }) {
             onChange={handleChange} 
             variant="outlined"
             label="Enter your review..."
-            multiline/><br/>
+            multiline
+            rows={5}/><br/>
           {errors.length !== 0 
           ?
           errors.map((error) => {

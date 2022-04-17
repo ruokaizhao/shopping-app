@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { cartAdded, cartUpdated } from '../features/cartSlice';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Rating, CardActionArea } from '@mui/material';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Rating, CardActionArea, Button } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 function Product({ product, user }) {
@@ -102,21 +102,19 @@ function Product({ product, user }) {
             <Rating name="half-rating-read" value={parseFloat(rating)} precision={0.5} readOnly /><br/>
             {isAddedToCart 
             ?
-            <Typography sx={{mt: 1}}>The item has been added to cart.</Typography>
+            <Typography color="secondary" sx={{mt: 1}}>The item has been added to cart.</Typography>
             : null} 
           </Typography>
-          <Typography color="secondary" sx={{mt: 2}} variant="h6">About this item:</Typography>
+          <Typography sx={{mt: 2}} variant="h6">About this item:</Typography>
           <Typography paragraph>{descriptionShort}</Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add shopping cart" onClick={handleCartClick} >
-            <AddShoppingCartIcon />
-          </IconButton>       
+          <Button variant="contained" startIcon={<AddShoppingCartIcon />} onClick={handleCartClick}>Add to cart</Button>       
         </CardActions>          
       </Card>
       : 
       <div>
-        <Card sx={{ width: 600}}>
+        <Card sx={{ width: 500}}>
           <CardHeader
             avatar={
               <Avatar aria-label="recipe">
@@ -145,10 +143,8 @@ function Product({ product, user }) {
           <Typography sx={{mt: 2}} variant="h6">About this item:</Typography>
           <Typography paragraph>{description}</Typography>
         </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add shopping cart" onClick={handleCartClick} >
-            <AddShoppingCartIcon />
-          </IconButton>       
+        <CardActions disableSpacing>       
+          <Button variant="contained" startIcon={<AddShoppingCartIcon />} onClick={handleCartClick}>Add to cart</Button>
         </CardActions>          
       </Card>
       </div>}           
