@@ -38,7 +38,12 @@ function Product({ product, user }) {
             }, 2000)
           })
         } else {
-          r.json().then((err) => setErrors([...err.errors]))
+          r.json().then((err) => {
+            setErrors([...err.errors])
+            setTimeout(() => {
+              setErrors([])
+            }, 2000)
+          })
         }
       })
     } else {
@@ -66,7 +71,12 @@ function Product({ product, user }) {
             }, 2000)
           })
         } else {
-          r.json().then((err) => setErrors([...err.errors]))
+          r.json().then((err) => {
+            setErrors([...err.errors])
+            setTimeout(() => {
+              setErrors([])
+            }, 2000)
+          })
         }
       })
     }    
