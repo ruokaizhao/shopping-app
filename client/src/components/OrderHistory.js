@@ -1,5 +1,5 @@
-import { Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Rating, CardActionArea, Grid } from '@mui/material';
 
 function OrderHistory({ user }) {
   const [orders, setOrders] = useState([])
@@ -19,23 +19,40 @@ function OrderHistory({ user }) {
     <div>
       {orders.length !== 0
       ?
-      <div>
-        <Grid container spacing={8} >
+      <Grid container>
+        <Grid item xs={0} sm={1} />
+        <Grid item container xs={12} sm={10} spacing={4}>        
           {orders.map((order) => {
             return (
               <Grid key={order.id} item xs={12} sm={4} >
-                <div >
-                  <p>{order.title}</p>
-                  <p><strong>Price: ${order.price}</strong></p>
-                  <p><strong>Quantity: {order.quantity}</strong></p>
-                  <img src={order.image} alt={order.title}/>
-                </div>
+                  <Card sx={{ maxWidth: 500, height: 600 }}>
+                    <CardHeader
+                      avatar={
+                        <Avatar aria-label="recipe">
+                          <img src={order.image} alt={order.title} />
+                        </Avatar>
+                      }        
+                      title={order.title}
+                      subheader={
+                        <>
+                          <strong>Price: ${order.price}</strong><br/>
+                          <strong>Quantity: ${order.quantity}</strong>
+                        </>                          
+                      }
+                    />
+                    <CardMedia
+                      component="img"
+                      height="500"
+                      image={order.image}
+                      alt={order.title}
+                    />
+                  </Card>
               </Grid>              
             )
-          })}        
+          })} 
         </Grid>
-      </div> 
-        
+        <Grid item xs={0} sm={1} />       
+      </Grid>      
       :
       <Typography variant="h4" sx={{mb:4}}>
         There is nothing here.
