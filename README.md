@@ -15,7 +15,7 @@ bundle install
 to install all the dependencies, then run:
 
 ```bash
-rake server
+rails s
 ```
 
 to start the server.
