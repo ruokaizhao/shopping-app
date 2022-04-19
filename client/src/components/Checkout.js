@@ -40,8 +40,6 @@ function Checkout({ userId }) {
               setIsEditing(false)
             }          
           })
-        } else {
-          r.json().then((errors) => console.log(errors))
         }
       })
     }    

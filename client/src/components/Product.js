@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { cartAdded, cartUpdated } from '../features/cartSlice';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Rating, CardActionArea, Button } from '@mui/material';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, Typography, Rating, CardActionArea, Button } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 function Product({ product, user }) {

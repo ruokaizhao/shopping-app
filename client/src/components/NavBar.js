@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCarts } from '../features/cartSlice';
 import SearchBar from './SearchBar';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { AppBar, Toolbar } from "@mui/material";
 
 function NavBar({ user, setProducts, search, setSearch }) {
