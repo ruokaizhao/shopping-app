@@ -4,6 +4,12 @@ This is a full-stack project using React to build the frontend and Ruby on Rails
 
 The data used in this project is some fake data about several items for sale.
 
+The backend code is in the root directory of this project, and the frontend code is in the client directory.
+
+This project has also been deployed to Heroku at the following address:
+
+https://shopping-app-react-ruby.herokuapp.com/
+
 ## Installation
 
 Fork and clone this repo, cd into the directory and run:
