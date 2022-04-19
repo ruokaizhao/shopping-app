@@ -35,6 +35,8 @@ npm start --prefix client
 
 to install all the dependencies and start the application.
 
+## Project Walkthrough
+
 Upon loading, the user will see the homepage with with a top app bar at the top area of the page. Within the app bar, there is a "HOME" link which upon clicking, will take user back to the homepage no matter where the user was previously. Next to the "HOME" link is a search box, user can type in keywords to search for the items they need, anytime user types a letter into the input area, a fetch request will be sent to the backend server to get the list of items which match user's input. Next to the search box, there are two links, enabling users to see their order history (if the use has submitted an order), shopping cart (there will be a number after the CART word, showing how many items are currently in the shopping cart). The data in the order history and shopping cart are preserved in the backend, meaning that the data will still be there if the user log back in even after logging out and closing the web page.
 
 On the right most of the app bar, there are a short text saying "Hello, guest" (the word guest will change to the name of the user after logging in), a "Login" link and a "Signup" link. Users can choose to signup or login if they already have signed up before. The "Login" and "Signup" links will change to "Logout" once signed in.
