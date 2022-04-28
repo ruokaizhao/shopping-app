@@ -1,4 +1,4 @@
-import { Grid, Rating, TextField } from '@mui/material';
+import { formControlClasses, Grid, Rating, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { reviewRemoved, reviewUpdated } from '../features/productDetailSlice';
@@ -7,13 +7,43 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
-function Review({ review, userId }) {
+function FormikReview({ review, userId }) {
   const [isEditing, setIsEditing] = useState(false)
-  const [formData, setFormData] = useState({
-    rating: review.rating,
-    content: review.content
-  })
+
+  const formik = useFormik({
+    initialValues: {
+      rating: review.rating,
+      content: review.content
+    },
+    validationSchema: Yup.object({
+      rating: Yup.string()
+        .required('Required'),
+      content: Yup.string()
+        .min(10, 'Must be 10 characters or more')
+        .required('Content is required'),
+    }),
+    onSubmit: () => {
+      fetch(`/api/reviews/${review.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+          rating: parseInt(formik.values.rating),
+          content: formik.values.content
+        })
+      })
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((reviewReturned) => dispatch(reviewUpdated(reviewReturned)))
+          setIsEditing((isEditing) => !isEditing)
+        }
+      })
+    },
+  });
 
   const timestamp = new Date(review.updated_at).toLocaleString();
   const currentUser = userId === review.user_id
@@ -23,29 +53,6 @@ function Review({ review, userId }) {
     setIsEditing((isEditing) => !isEditing)
   }
 
-  function handleChange(e) {
-    setFormData({...formData, [e.target.name]: e.target.value})
-  }
-
-  function handleReviewSubmit(e) {
-    e.preventDefault()
-    fetch(`/api/reviews/${review.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify({
-        rating: parseInt(formData.rating),
-        content: formData.content
-      })
-    })
-    .then((r) => {
-      if (r.ok) {
-        r.json().then((reviewReturned) => dispatch(reviewUpdated(reviewReturned)))
-        setIsEditing((isEditing) => !isEditing)
-      }
-    })
-  }
 
   function handleDeleteClick() {
     fetch(`/api/reviews/${review.id}`, {
@@ -85,34 +92,40 @@ function Review({ review, userId }) {
         </CardActions>
       </Card>
       {isEditing ? 
-      <>
+      <form onSubmit={formik.handleSubmit}>
         <TextField
-        sx={{width: 500, mt: 3}} 
-        id="review_content" 
-        name="content" 
-        autoFocus
-        value={formData.content} 
-        onChange={handleChange} 
-        variant="outlined"
-        label="Enter your review..."
-        multiline
-        rows={5} />
+          sx={{width: 500, mt: 3}} 
+          id="content" 
+          name="content" 
+          autoFocus
+          value={formik.values.content} 
+          onChange={formik.handleChange} 
+          onBlur={formik.handleBlur}
+          error={formik.touched.content && Boolean(formik.errors.content)}
+          helperText={formik.touched.content && formik.errors.content}
+          variant="outlined"
+          label="Enter your review..."
+          multiline
+          rows={5}
+        />
         <Grid container>
           <Grid item sx={{mt: 2, flexGrow: 1}}>
             <Rating
-            name="rating"
-            value={parseInt(formData.rating)}
-            onChange={(handleChange)}
+              id="rating"
+              name="rating"
+              error={formik.touched.rating && Boolean(formik.errors.rating) ? true : undefined}
+              value={parseInt(formik.values.rating)}
+              onChange={formik.handleChange}
             />  
           </Grid>
           <Grid item sx={{mt: 2}}>
-            <Button variant="outlined" type="submit" onClick={handleReviewSubmit}>Submit your review</Button>
+            <Button variant="outlined" type="submit">Submit your review</Button>
           </Grid>
         </Grid>   
-      </>            
+      </form>            
       : null}   
       </>     
   );
 }
 
-export default Review;
+export default FormikReview;

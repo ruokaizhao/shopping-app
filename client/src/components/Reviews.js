@@ -4,6 +4,7 @@ import { reviewAdded } from "../features/productDetailSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Grid, Rating, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import FormikReview from './FormikReview';
 
 function Reviews({ userId }) {
   const [isEditingReview, setIsEditingReview] = useState(false)
@@ -56,7 +57,8 @@ function Reviews({ userId }) {
         </Typography>
         {productDetails.reviews.map((review) => {
           return (
-            <Review key={review.id} review={review} userId={userId} setIsEditingReview={setIsEditingReview} />
+            // <Review key={review.id} review={review} userId={userId} setIsEditingReview={setIsEditingReview} />
+            <FormikReview key={review.id} review={review} userId={userId} setIsEditingReview={setIsEditingReview} />
           )
         })}
         <Button sx={{mt: 3}} onClick={() => setIsEditingReview((isEditingReview) => !isEditingReview)}>

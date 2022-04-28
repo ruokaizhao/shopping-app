@@ -23,6 +23,9 @@ const cartsSlice = createSlice({
     cartUpdated(state, action) {
       const item = state.entities.find((product) => product.id === action.payload.id)
       item.quantity = action.payload.quantity
+    },
+    cartCleared(state, action) {
+      state.entities = []
     }
   },
   extraReducers: {
@@ -32,5 +35,5 @@ const cartsSlice = createSlice({
   }
 })
 
-export const { cartAdded, cartRemoved, cartUpdated } = cartsSlice.actions;
+export const { cartAdded, cartRemoved, cartUpdated, cartCleared } = cartsSlice.actions;
 export default cartsSlice.reducer;
