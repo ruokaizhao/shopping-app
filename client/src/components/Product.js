@@ -118,7 +118,7 @@ function Product({ product, user }) {
             ?
             <Typography color="secondary" sx={{mt: 1}}>The item has been added to cart.</Typography>
             : null}
-            {errors.length !== 0 
+          {errors.length !== 0 
             ?
             errors.map((error) => {
               return (

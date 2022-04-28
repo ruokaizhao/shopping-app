@@ -15,7 +15,7 @@ function ProductDetail({ user, products }) {
   // code sets product to be {} if the left part of || is undefine, and for unknown reason, access the id attribute of {} will not throw an
   // error. The reason to pass product as prop to Product instead of productDetails is that the rating comes from backend where it pulls the
   // average rating of all the reviews for a product, and thus the rating attribute in productDetails will not update unless you re-fetch the
-  // data from backend, causing the rating not updated after submitting of editing an review. 
+  // data from backend, causing the rating not updated after submitting or editing an review. 
   // 
   // The App component will re-fetch the products which will have the latest data for rating, by doing so, the rating on the ProductDetail page
   // will update automatically.

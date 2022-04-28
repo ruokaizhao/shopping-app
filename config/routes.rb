@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :orders, only: [:create]
     resources :addresses, only: [:create, :update]
 
+    get "/reviews/highest_rating", to: "reviews#highest_rating"
+
     get "/search/:search", to: "products#search"
     # The "" and " " search will hit "/search" route.
     get "/search", to: "products#index"

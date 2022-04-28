@@ -17,6 +17,11 @@ class Api::ReviewsController < ApplicationController
     head :no_content
   end
 
+  def highest_rating
+    review = Review.order(rating: :desc).limit(1)
+    render json: review, status: :ok
+  end
+
   private
 
   def review_params
