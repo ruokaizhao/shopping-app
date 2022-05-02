@@ -12,6 +12,8 @@ import OrderHistory from "./OrderHistory";
 import { createTheme, Grid, Paper, ThemeProvider } from "@mui/material";
 import { useSelector } from "react-redux";
 import { blue } from "@mui/material/colors";
+import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
 
 const theme = createTheme({
   palette: {
@@ -74,6 +76,12 @@ function App() {
                 </Route>
                 <Route path="/orders">
                   <OrderHistory user={user} />
+                </Route>
+                <Route path="/forgot_password" >
+                  <ForgotPassword />
+                </Route>
+                <Route path="/reset_password/:token">
+                  <ResetPassword setUser={setUser} />
                 </Route>
                 <Route exact path="/">
                   <Home products={products} user={user} />
