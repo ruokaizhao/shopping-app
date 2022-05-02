@@ -1,11 +1,15 @@
 import { Box, TextField } from '@mui/material';
-import React from 'react';
+import debounce from 'lodash.debounce';
+import React, { useCallback } from 'react';
 
 function SearchBar({ setProducts, search, setSearch }) {
-  
+
+  const debounceSearchChange = useCallback(
+    debounce((e) => setSearch(e.target.value), 1000)
+  , [])  
 
   function handleSearchChange(e) {
-    setSearch(e.target.value)
+    debounceSearchChange(e)    
   }
 
   function handleSearchSubmit(e) {
@@ -45,7 +49,7 @@ function SearchBar({ setProducts, search, setSearch }) {
 
   return (
     <Box component="form" onSubmit={handleSearchSubmit}>
-      <TextField variant="filled" hiddenLabel size="small" color="secondary" value={search} onChange={handleSearchChange} />
+      <TextField variant="filled" hiddenLabel size="small" color="secondary" onChange={handleSearchChange} />
     </Box>
   );
 }
