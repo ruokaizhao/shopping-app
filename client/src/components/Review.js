@@ -8,7 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-function Review({ review, userId }) {
+function Review({ review, userId, isEditingReview, setIsEditingReview }) {
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
     rating: review.rating,
@@ -21,6 +21,7 @@ function Review({ review, userId }) {
 
   function handleEditClick() {
     setIsEditing((isEditing) => !isEditing)
+    setIsEditingReview(isEditingReview => !isEditingReview)
   }
 
   function handleChange(e) {

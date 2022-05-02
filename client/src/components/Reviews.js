@@ -58,7 +58,7 @@ function Reviews({ userId }) {
         {productDetails.reviews.map((review) => {
           return (
             // <Review key={review.id} review={review} userId={userId} setIsEditingReview={setIsEditingReview} />
-            <FormikReview key={review.id} review={review} userId={userId} setIsEditingReview={setIsEditingReview} />
+            <FormikReview key={review.id} review={review} userId={userId} setIsEditingReview={setIsEditingReview} isEditingReview={isEditingReview} />
           )
         })}
         <Button sx={{mt: 3}} onClick={() => setIsEditingReview((isEditingReview) => !isEditingReview)}>

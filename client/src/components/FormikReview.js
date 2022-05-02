@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-function FormikReview({ review, userId }) {
+function FormikReview({ review, userId, isEditingReview, setIsEditingReview }) {
   const [isEditing, setIsEditing] = useState(false)
 
   const formik = useFormik({
@@ -51,6 +51,7 @@ function FormikReview({ review, userId }) {
 
   function handleEditClick() {
     setIsEditing((isEditing) => !isEditing)
+    setIsEditingReview(isEditingReview => !isEditingReview)
   }
 
 
