@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: amazon_clone_development
+  database: shopping_app_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: amazon_clone_test
+  database: shopping_app_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: amazon_clone_production
-  username: amazon_clone
-  password: <%= ENV["AMAZON_CLONE_DATABASE_PASSWORD"] %>
+  database: shopping_app_production
+  username: shopping_app
+  password: <%= ENV["SHOPPING_APP_DATABASE_PASSWORD"] %>
