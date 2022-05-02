@@ -113,10 +113,15 @@ function Login({ onLogin }) {
             >
               Sign In
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container justifyContent="space-between">
               <Grid item sx={{mb: 4}}>
                 <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+              <Grid item sx={{mb: 4}}>
+                <Link href="/forgot_password" variant="body2">
+                  {"Forgot your password?"}
                 </Link>
               </Grid>
             </Grid>
