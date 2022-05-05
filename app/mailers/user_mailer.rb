@@ -11,6 +11,7 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @token = params[:token]
     @url  = "https://shopping-app-react-ruby.herokuapp.com/reset_password/#{@token}"
+    # @url  = "http://localhost:3000/reset_password/#{@token}"
     mail(to: @user.email, subject: 'Password reset instructions')
   end  
 
