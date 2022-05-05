@@ -63,6 +63,10 @@ For the review which is left by the user currently logged in, there will be two 
 
 After adding item to the shopping cart, the user can click on the "CART" link in the app bar and go to shopping cart page. There, user will find all the items currently in the cart, with total number and price of the items at the top of the page. On the bottom of each card of items, there are subtotals of the number and price of the current item, there are also two buttons, "-" and "+", letting user change the number of the item. If the number of the corresponding item is 1, the "-" button will change to "REMOVE FROM CART". Notice that the total and subtotal are changed on the fly when user click the "-" and "+" buttons.
 
+#### Update:
+
+After using the Drawer component from Mui, now instead of changing the route to shopping cart page, the cart component will float above other component when user clicks on the cart button in the NavBar, this will make the user experience better.
+
 ### Checkout
 
 On the top of the page, there is a "CHECKOUT" button, upon clicking, will bring user to the checkout page. In there, user will see several input boxes letting them enter their address. After entering the address, the user can click the "PLACE YOUR ORDER" button to submit the order, and the page will show a message letting the user know the order has been received and will be dispatched shortly.
