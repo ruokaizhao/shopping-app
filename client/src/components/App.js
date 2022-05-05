@@ -9,7 +9,7 @@ import Cart from "./Carts";
 import ProductDetail from "./ProductDetail";
 import Checkout from "./Checkout";
 import OrderHistory from "./OrderHistory";
-import { createTheme, Grid, Paper, ThemeProvider } from "@mui/material";
+import { createTheme, Grid, Paper, ThemeProvider, Drawer } from "@mui/material";
 import { useSelector } from "react-redux";
 import { blue } from "@mui/material/colors";
 import ForgotPassword from "./ForgotPassword";
@@ -27,6 +27,7 @@ function App() {
   const [products, setProducts] = useState([])
   const productDetails = useSelector((state) => state.productDetails.entities)
   const [search, setSearch] = useState("")
+  const [cartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
     fetch("/api/me")
@@ -50,9 +51,12 @@ function App() {
     <div>
       <ThemeProvider theme={theme} >
         <Paper elevation={3}>
+          <Drawer PaperProps={{ sx: { width: "50%", minWidth: 450 } }} anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
+            <Cart />
+          </Drawer>
           <Grid container direction="column" spacing={4}>
             <Grid item >          
-              <NavBar user={user} setProducts={setProducts} search={search} setSearch={setSearch} />                  
+              <NavBar user={user} setProducts={setProducts} search={search} setSearch={setSearch} setCartOpen={setCartOpen} />                  
             </Grid>
             <Grid item>
               <Switch>
@@ -65,9 +69,9 @@ function App() {
                 <Route path="/login">
                   <Login onLogin={setUser} />
                 </Route>
-                <Route path="/carts">
+                {/* <Route path="/carts">
                   <Cart />
-                </Route>
+                </Route> */}
                 <Route path="/products/:productId">
                   <ProductDetail user={user} products={products} />
                 </Route>

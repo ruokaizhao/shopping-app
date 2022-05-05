@@ -14,7 +14,7 @@ function Cart() {
 
 
   return (
-    <Box sx={{ml: 5}}>
+    <Box sx={{ml: 5, mt: 5}}>
       {totalPrice > 0 
       ?
       <>     
@@ -35,9 +35,8 @@ function Cart() {
       :
       <Typography variant="h4" sx={{mb:4}}>
         There is nothing in the cart.
-      </Typography>}
-         
-      </Box>
+      </Typography>}         
+    </Box>
   );
 }
 

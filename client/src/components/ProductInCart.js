@@ -60,7 +60,7 @@ function ProductInCart({ productInCart }) {
 
   return (        
     <div>
-      <Card sx={{ maxWidth: 500, height: 600, mb: 2 }}>
+      <Card sx={{ maxWidth: 350, height: 450, mb: 2 }}>
         <CardHeader
           avatar={
             <Avatar aria-label="recipe">
@@ -74,7 +74,7 @@ function ProductInCart({ productInCart }) {
         />
         <CardMedia
           component="img"
-          height="300"
+          height="150"
           image={productInCart.image}
           alt={productInCart.title}
         />

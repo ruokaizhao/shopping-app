@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import { Button, Grid } from '@mui/material';
 import { AppBar, Toolbar } from "@mui/material";
 
-function NavBar({ user, setProducts, search, setSearch }) {
+function NavBar({ user, setProducts, search, setSearch, setCartOpen }) {
   const carts = useSelector((state) => state.carts.entities)
   const itemsInCarts = carts.reduce((previous, current) => previous + current.quantity, 0)
   const dispatch = useDispatch()
@@ -53,11 +53,11 @@ function NavBar({ user, setProducts, search, setSearch }) {
             </Grid>
 
             <Grid item sx={{marginRight: 1}} >
-              <NavLink to="/carts">
-                <Button color="secondary">
+              {/* <NavLink to="/carts"> */}
+                <Button color="secondary" onClick={() => setCartOpen(true)}>
                   Cart: {itemsInCarts}
                 </Button>
-              </NavLink>
+              {/* </NavLink> */}
             </Grid>
 
             <Grid item >
