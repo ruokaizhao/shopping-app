@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardHeader, CardMedia, Avatar, Typography, Grid } from '@mui/material';
+import { Card, CardHeader, CardMedia, Avatar, Typography, Grid, Container } from '@mui/material';
 
 function OrderHistory({ user }) {
   const [orders, setOrders] = useState([])
@@ -54,9 +54,12 @@ function OrderHistory({ user }) {
         <Grid item xs={0} sm={1} />       
       </Grid>      
       :
-      <Typography variant="h4" sx={{mb:4}}>
-        There is nothing here.
-      </Typography>}  
+      <Container >
+        <Typography variant="h4" sx={{mb:4}}>
+          There is nothing in the cart.
+        </Typography>
+      </Container>
+      }  
     </div>
   )
 }

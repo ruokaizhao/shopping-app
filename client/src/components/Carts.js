@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Container, Divider, Typography } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -19,13 +19,14 @@ function Cart({ setCartOpen }) {
       ?
       <>     
         <Link to="/checkout" onClick={() => setCartOpen(false)}>
-          <Button variant="contained" color="secondary" sx={{marginBottom: 4}}>
+          <Button variant="contained" color="secondary" sx={{mb: 2}}>
             Checkout
           </Button>
         </Link> 
-        <Typography variant="h4">Total items: {totalItems}</Typography> 
-        <Typography sx={{mb: 2}} variant="h4">Total price: ${totalPrice}</Typography> 
-        
+        <Divider />
+        <Typography sx={{mt: 2}} variant="h5">Total items: {totalItems}</Typography>      
+        <Typography sx={{mb: 2}} variant="h5">Total price: ${totalPrice}</Typography> 
+        <Divider sx={{mb: 2}} />            
         {carts.map((productInCart) => {
           return (
             <ProductInCart key={productInCart.id} productInCart={productInCart} />
@@ -33,9 +34,12 @@ function Cart({ setCartOpen }) {
         })}
       </> 
       :
-      <Typography variant="h4" sx={{mb:4}}>
-        There is nothing in the cart.
-      </Typography>}         
+      <Container >
+        <Typography variant="h4" sx={{mb:4}}>
+          There is nothing in the cart.
+        </Typography>
+      </Container>
+      }         
     </Box>
   );
 }
