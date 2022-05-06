@@ -52,7 +52,7 @@ function App() {
       <ThemeProvider theme={theme} >
         <Paper elevation={3}>
           <Drawer PaperProps={{ sx: { width: "30%", minWidth: 450 } }} anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
-            <Cart />
+            <Cart setCartOpen={setCartOpen} />
           </Drawer>
           <Grid container direction="column" spacing={4}>
             <Grid item >          

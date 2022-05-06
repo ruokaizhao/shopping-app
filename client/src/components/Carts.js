@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductInCart from "./ProductInCart";
 
-function Cart() {
+function Cart({ setCartOpen }) {
   const carts = useSelector((state) => state.carts.entities)
   // To use reduce on an array of objects, the first argument cannot be the first element in the array, since it will later be used as previous
   // value, and that value cannot have keys of the containing object. So, you need to pass in a initial value of 0, to make the previous equal
@@ -18,7 +18,7 @@ function Cart() {
       {totalPrice > 0 
       ?
       <>     
-        <Link to="/checkout">
+        <Link to="/checkout" onClick={() => setCartOpen(false)}>
           <Button variant="contained" color="secondary" sx={{marginBottom: 4}}>
             Checkout
           </Button>
