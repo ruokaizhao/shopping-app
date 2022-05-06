@@ -162,10 +162,15 @@ function Signup({ onLogin }) {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item sx={{mb: 4}}>
+            <Grid container sx={{mb: 4}} justifyContent="space-between">
+              <Grid item>
                 <Link href="/login" variant="body2">
                   Already have an account? Sign in
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/forgot_password" variant="body2">
+                  Forgot your password?
                 </Link>
               </Grid>
             </Grid>

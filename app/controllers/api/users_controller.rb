@@ -17,7 +17,7 @@ class Api::UsersController < ApplicationController
     user = User.find_by(email: params[:email])
     if user
       user.send_password_reset
-      render json: { alerts: ["We have sent you an email to your registered email address, please follow the instruction to reset your password" ] }, status: :created
+      render json: { alerts: ["We have sent you an email to your registered email address, please follow the instruction to reset your password." ] }, status: :created
     else
       render json: { errors: ["Email address not registered"] }, status: :not_found
     end

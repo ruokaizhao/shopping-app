@@ -1,8 +1,18 @@
 import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 function ResetPassword({ setUser }) {
   const [alerts, setAlerts] = useState([])
+  const [errors, setErrors] = useState([])
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -35,13 +45,17 @@ function ResetPassword({ setUser }) {
       if (r.ok) {
         r.json().then((data) => {
           setUser(data.user)
+          setErrors([])
           setAlerts(data.alerts)
           setTimeout(() => {
             history.push("/")
           }, 2000)
         })
       } else {
-        r.json().then((data) => setAlerts(data.errors))
+        r.json().then((data) => {
+          setAlerts([])
+          setErrors(data.errors)
+        })
       }
     })
   }
@@ -49,20 +63,89 @@ function ResetPassword({ setUser }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="reset-password-email">Please enter your email:</label>
-        <input type="email" id="reset-password-email" value={formData.email} name="email" onChange={handleChange} />
-        <label htmlFor="reset-password-password">Please enter your password:</label>
-        <input type="password" id="reset-password-password" value={formData.password} name="password" onChange={handleChange} />
-        <label htmlFor="reset-password-password2">Please confirm your password:</label>
-        <input type="password" id="reset-password-password2" value={formData.password2} name="password2" onChange={handleChange} />
-        <button type="submit">Submit</button>
-        {alerts.map((alert, index) => {
-          return (
-            <p key={index}>{alert}</p>
-          )
-        })}
-      </form>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Reset Password
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sx={{mb: 2}}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password2"
+                  label="Comfirm password"
+                  type="password"
+                  id="password2"
+                  autoComplete="confirm-password"
+                  value={formData.password2}
+                  onChange={handleChange}
+                />
+              </Grid>
+            </Grid>
+            {alerts.map((alert, index) => {
+              return (
+                <Typography key={index} sx={{mt: 2}}>
+                  {alert}
+                </Typography>
+              )
+            })}  
+            {errors.map((error, index) => {
+              return (
+                <Typography color="red" key={index} sx={{mt: 2}}>
+                  {error}
+                </Typography>
+              )
+            })}         
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              sx={{ mt: 3, mb: 5 }}
+            >
+              Submit
+            </Button>
+          </Box>
+        </Box>
+      </Container>    
     </div>
   )
 }
