@@ -54,7 +54,7 @@ function OrderHistory({ user }) {
         <Grid item xs={0} sm={1} />       
       </Grid>      
       :
-      <Typography variant="h4" sx={{mb:4}}>
+      <Typography variant="h4" sx={{mb:4, ml: 3}}>
         There is nothing in the cart.
       </Typography>
       }  
