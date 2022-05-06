@@ -54,11 +54,9 @@ function OrderHistory({ user }) {
         <Grid item xs={0} sm={1} />       
       </Grid>      
       :
-      <Container >
-        <Typography variant="h4" sx={{mb:4}}>
-          There is nothing in the cart.
-        </Typography>
-      </Container>
+      <Typography variant="h4" sx={{mb:4}}>
+        There is nothing in the cart.
+      </Typography>
       }  
     </div>
   )
