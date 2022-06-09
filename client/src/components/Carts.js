@@ -18,7 +18,7 @@ function Cart({ setCartOpen }) {
       {totalPrice > 0 
       ?
       <>     
-        <Link to="/checkout" onClick={() => setCartOpen(false)}>
+        <Link to="/checkout" onClick={() => setCartOpen(false)} style={{ textDecoration: "none" }}>
           <Button variant="contained" color="secondary" sx={{mb: 2}}>
             Checkout
           </Button>

@@ -33,7 +33,7 @@ function NavBar({ user, setProducts, search, setSearch, setCartOpen }) {
           <Grid container>
 
             <Grid item >
-              <NavLink to="/" onClick={handleHomeClick}>
+              <NavLink to="/" onClick={handleHomeClick} style={{ textDecoration: "none" }}>
                 <Button color="secondary">
                   Home
                 </Button>             
@@ -45,7 +45,7 @@ function NavBar({ user, setProducts, search, setSearch, setCartOpen }) {
             </Grid>
 
             <Grid item sx={{marginRight: 1}} >
-              <NavLink to="/orders">
+              <NavLink to="/orders" style={{ textDecoration: "none" }}>
                 <Button color="secondary">
                   Order History
                 </Button>
@@ -64,7 +64,7 @@ function NavBar({ user, setProducts, search, setSearch, setCartOpen }) {
               {user.id ? 
               <div>
                 Hello, <strong>{user.name}</strong>
-                <NavLink to="/logout">
+                <NavLink to="/logout" style={{ textDecoration: "none" }}>
                   <Button color="secondary">
                     Logout
                   </Button>
@@ -72,12 +72,12 @@ function NavBar({ user, setProducts, search, setSearch, setCartOpen }) {
               </div> : 
               <div>
                 Hello, <strong>guest</strong>
-                <NavLink to="/login">
+                <NavLink to="/login" style={{ textDecoration: "none" }}>
                   <Button color="secondary">
                     Login
                   </Button>
                 </NavLink>
-                <NavLink to="/signup">
+                <NavLink to="/signup" style={{ textDecoration: "none" }}>
                   <Button color="secondary">
                     Signup
                   </Button>
