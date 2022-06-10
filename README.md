@@ -6,9 +6,7 @@ The data used in this project is some fake data about several items for sale.
 
 The backend code is in the root directory of this project, and the frontend code is in the client directory.
 
-This project has also been deployed to Heroku at the following address:
-
-https://shopping-app-react-ruby.herokuapp.com/
+This project has also been deployed to Heroku at [here](https://shopping-app-react-ruby.herokuapp.com/).
 
 ## Installation
 
