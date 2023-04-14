@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: shopping_app_production
-  username: shopping_app
-  password: <%= ENV["SHOPPING_APP_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
